@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://colibrifront.onrender.com/api/";
+const API_URL = "https://colibriback.onrender.com/api/";
 
 export const login = async (email, password) => {
   const { data } = await axios.post(API_URL + "auth/login", { email, password });
