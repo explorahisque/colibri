@@ -63,12 +63,12 @@
             
             try {
                 // Verificar si existen usuarios en la base de datos mediante un endpoint público
-                const userCheckResponse = await fetch('http://localhost:3000/api/usuarios/existen');
+                const userCheckResponse = await fetch('/api/usuarios/existen');
                 const userCheckData = await userCheckResponse.json();
 
                 if (userCheckResponse.ok && !userCheckData.existenUsuarios) {
                     // Si no hay usuarios, permitir la creación del primer usuario sin autenticación
-                    const response = await fetch('http://localhost:3000/api/usuarios/primer-usuario', {
+                    const response = await fetch('/api/usuarios/primer-usuario', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'

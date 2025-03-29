@@ -121,10 +121,10 @@ export default {
 
     const fetchAllData = async () => {
       try {
-        const resarticulos = await fetch("http://localhost:3000/api/articulos").then(r => r.json());
-        const resTemas = await fetch("http://localhost:3000/api/temas").then(r => r.json());
-        const resAreas = await fetch("http://localhost:3000/api/areas").then(r => r.json());
-        const resGrados = await fetch("http://localhost:3000/api/grados").then(r => r.json());
+        const resarticulos = await fetch("https://colibriback.onrender.com/api/articulos").then(r => r.json());
+        const resTemas = await fetch("https://colibriback.onrender.com/api/temas").then(r => r.json());
+        const resAreas = await fetch("https://colibriback.onrender.com/api/areas").then(r => r.json());
+        const resGrados = await fetch("https://colibriback.onrender.com/api/grados").then(r => r.json());
 
         // Obtener el nombre del área actual
         const areaActual = resAreas.find(a => a.id === parseInt(areaId));

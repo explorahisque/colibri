@@ -183,7 +183,7 @@ Authorization: Bearer <token>
 
 1. Configurar la URL base en el frontend:
 ```javascript
-const API_URL = 'http://localhost:3000';
+const API_URL = 'https://colibriback.onrender.com';
 ```
 
 2. Incluir el token en las peticiones:

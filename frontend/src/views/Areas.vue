@@ -29,7 +29,7 @@ export default {
 
     const fetchAreas = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/areas");
+        const res = await fetch("https://colibriback.onrender.com/api/areas");
         areas.value = await res.json();
       } catch (error) {
         console.error("Error al obtener las áreas", error);

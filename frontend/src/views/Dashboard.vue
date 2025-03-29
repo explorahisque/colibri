@@ -83,7 +83,7 @@ const { isAuthenticated, user, checkAuth } = useAuth() // Obtener el estado real
 // Función para obtener los grados desde la API
 const fetchGrados = async () => {
   try {
-    const response = await fetch('http://localhost:3000/api/grados')
+    const response = await fetch('https://colibriback.onrender.com/api/grados')
     if (!response.ok) throw new Error('Error al obtener los grados')
     const grados = await response.json()
     gradoNames.value = grados.map(grado => ({ id: grado.id, nombre: grado.nombre })) // Guardar id y nombre
@@ -95,7 +95,7 @@ const fetchGrados = async () => {
 // Función para obtener las áreas desde la API
 const fetchAreas = async () => {
   try {
-    const response = await fetch('http://localhost:3000/api/areas')
+    const response = await fetch('https://colibriback.onrender.com/api/areas')
     if (!response.ok) throw new Error('Error al obtener las áreas')
     const areas = await response.json()
     areaNames.value = areas.map(area => ({ id: area.id, nombre: area.nombre })) // Guardar id y nombre

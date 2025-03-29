@@ -20,7 +20,7 @@ export function useAuth() {
       }
 
       // Se cambia la URL a /api/auth/perfil
-      const response = await axios.get('http://localhost:3000/api/auth/perfil', config)
+      const response = await axios.get('https://colibriback.onrender.com/api/auth/perfil', config)
       console.log('Perfil response:', response.data)
       
       user.value = response.data

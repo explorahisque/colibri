@@ -260,7 +260,7 @@ export default {
     const eliminararticulo = async (id) => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch(`http://localhost:3000/api/articulos/${id}`, {
+        const response = await fetch(`https://colibriback.onrender.com/api/articulos/${id}`, {
           method: "DELETE",
           headers: {
             "Authorization": token ? `Bearer ${token}` : ""
@@ -278,7 +278,7 @@ export default {
     const duplicararticulo = async (id) => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch(`http://localhost:3000/api/articulos/${id}`, {
+        const response = await fetch(`https://colibriback.onrender.com/api/articulos/${id}`, {
           headers: { "Authorization": token ? `Bearer ${token}` : "" }
         });
         if (!response.ok) throw new Error("No se pudo obtener el articulo para duplicar");
@@ -288,7 +288,7 @@ export default {
           id: null,
           titulo: `${articuloOriginal.titulo} (Copia)`,
         };
-        const createResponse = await fetch("http://localhost:3000/api/articulos", {
+        const createResponse = await fetch("https://colibriback.onrender.com/api/articulos", {
           method: "POST",
           headers: { 
             "Content-Type": "application/json",
@@ -307,10 +307,10 @@ export default {
 
     const fetchAllData = async () => {
       try {
-        const resarticulos = await fetch("http://localhost:3000/api/articulos").then(r => r.json());
-        const resTemas = await fetch("http://localhost:3000/api/temas").then(r => r.json());
-        const resAreas = await fetch("http://localhost:3000/api/areas").then(r => r.json());
-        const resGrados = await fetch("http://localhost:3000/api/grados").then(r => r.json());
+        const resarticulos = await fetch("https://colibriback.onrender.com/api/articulos").then(r => r.json());
+        const resTemas = await fetch("https://colibriback.onrender.com/api/temas").then(r => r.json());
+        const resAreas = await fetch("https://colibriback.onrender.com/api/areas").then(r => r.json());
+        const resGrados = await fetch("https://colibriback.onrender.com/api/grados").then(r => r.json());
         // Mapear nombres desde cada respuesta
         gradoNames.value = [...new Set(resGrados.map(g => g.nombre))];
         areaNames.value = [...new Set(resAreas.map(a => a.nombre))];
@@ -442,8 +442,8 @@ export default {
           
           const metodo = articuloEditando.value.id ? "PUT" : "POST";
           const url = articuloEditando.value.id
-            ? `http://localhost:3000/api/articulos/${articuloEditando.value.id}`
-            : "http://localhost:3000/api/articulos";
+            ? `https://colibriback.onrender.com/api/articulos/${articuloEditando.value.id}`
+            : "https://colibriback.onrender.com/api/articulos";
           
           const token = localStorage.getItem("token");
           const response = await fetch(url, {

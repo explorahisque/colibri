@@ -223,10 +223,10 @@ export default {
     // 🔹 Obtener todos los datos
     const fetchAllData = async () => {
       try {
-        const resSubtemas = await fetch("http://localhost:3000/api/subtemas").then(r => r.json());
-        const resTemas = await fetch("http://localhost:3000/api/temas").then(r => r.json());
-        const resAreas = await fetch("http://localhost:3000/api/areas").then(r => r.json());
-        const resGrados = await fetch("http://localhost:3000/api/grados").then(r => r.json());
+        const resSubtemas = await fetch("https://colibriback.onrender.com/api/subtemas").then(r => r.json());
+        const resTemas = await fetch("https://colibriback.onrender.com/api/temas").then(r => r.json());
+        const resAreas = await fetch("https://colibriback.onrender.com/api/areas").then(r => r.json());
+        const resGrados = await fetch("https://colibriback.onrender.com/api/grados").then(r => r.json());
 
         // Unificar datos de subtemas con sus relaciones
         subtemas.value = resSubtemas.map(st => {

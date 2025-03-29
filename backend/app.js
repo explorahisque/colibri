@@ -1017,5 +1017,5 @@ app.get('/favicon.ico', (req, res) => res.status(204));
  * Iniciar el servidor
  */
 app.listen(port, () => {
-  console.log(`Backend API escuchando en http://localhost:${port}`);
+  console.log(`Backend API escuchando en https://colibriback.onrender.com:${port}`);
 });

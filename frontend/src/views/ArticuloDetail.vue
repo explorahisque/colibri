@@ -100,7 +100,7 @@ export default {
 
     const fetcharticuloById = async (id) => {
       try {
-        const { data } = await axios.get(`http://localhost:3000/api/articulos/${id}`);
+        const { data } = await axios.get(`https://colibriback.onrender.com/api/articulos/${id}`);
         articulo.value = data;
 
         if (typeof articulo.value.contenido === "string") {
@@ -123,7 +123,7 @@ export default {
     const fetchTemaById = async (id) => {
       if (!id) return null;
       try {
-        const { data } = await axios.get(`http://localhost:3000/api/temas/${id}`);
+        const { data } = await axios.get(`https://colibriback.onrender.com/api/temas/${id}`);
         return data;
       } catch (error) {
         console.error("❌ Error al obtener el tema:", error);
@@ -134,7 +134,7 @@ export default {
     const fetchAreaById = async (id) => {
       if (!id) return null;
       try {
-        const { data } = await axios.get(`http://localhost:3000/api/areas/${id}`);
+        const { data } = await axios.get(`https://colibriback.onrender.com/api/areas/${id}`);
         return data;
       } catch (error) {
         console.error("❌ Error al obtener el área:", error);
@@ -145,7 +145,7 @@ export default {
     const fetchGradoById = async (id) => {
       if (!id) return null;
       try {
-        const { data } = await axios.get(`http://localhost:3000/api/grados/${id}`);
+        const { data } = await axios.get(`https://colibriback.onrender.com/api/grados/${id}`);
         return data;
       } catch (error) {
         console.error("❌ Error al obtener el grado:", error);

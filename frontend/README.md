@@ -17,7 +17,7 @@ El frontend se comunica con el backend a través de peticiones HTTP utilizando l
 // Ejemplo de petición GET con axios
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api/';
+const API_URL = 'https://colibriback.onrender.com/api/';
 
 export const obtenerSubtemas = async () => {
   try {

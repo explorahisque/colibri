@@ -29,7 +29,7 @@ export default {
 
     const fetchGrados = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/grados");
+        const res = await fetch("https://colibriback.onrender.com/api/grados");
         grados.value = await res.json();
       } catch (error) {
         console.error("Error al obtener los grados", error);

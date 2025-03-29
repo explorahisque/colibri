@@ -29,7 +29,7 @@ export default {
 
     const fetchTemas = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/temas");
+        const res = await fetch("https://colibriback.onrender.com/api/temas");
         temas.value = await res.json();
       } catch (error) {
         console.error("Error al obtener los temas", error);
