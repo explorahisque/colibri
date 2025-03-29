@@ -1,0 +1,1235 @@
+[
+  {
+    "nombre": "Comprensión e interpretación textual - Lectura literal e inferencial"
+  },
+  {
+    "nombre": "Comprensión e interpretación textual - Identificación de ideas principales y secundarias"
+  },
+  {
+    "nombre": "Comprensión e interpretación textual - Resúmenes y síntesis de textos"
+  },
+  {
+    "nombre": "Producción textual - Textos narrativos simples"
+  },
+  {
+    "nombre": "Producción textual - Párrafos descriptivos"
+  },
+  {
+    "nombre": "Producción textual - Normas básicas de ortografía"
+  },
+  {
+    "nombre": "Literatura - Géneros literarios básicos"
+  },
+  {
+    "nombre": "Literatura - Mitos y leyendas colombianas"
+  },
+  {
+    "nombre": "Literatura - Cuentos cortos"
+  },
+  {
+    "nombre": "Gramática - Categorías gramaticales (sustantivo, adjetivo, verbo)"
+  },
+  {
+    "nombre": "Gramática - Tiempos verbales simples"
+  },
+  {
+    "nombre": "Gramática - Concordancia gramatical"
+  },
+  {
+    "nombre": "Pensamiento numérico - Números naturales y sus operaciones"
+  },
+  {
+    "nombre": "Pensamiento numérico - Números enteros y sus operaciones"
+  },
+  {
+    "nombre": "Pensamiento numérico - Múltiplos y divisores"
+  },
+  {
+    "nombre": "Pensamiento numérico - Teoría básica de números (MCM y MCD)"
+  },
+  {
+    "nombre": "Pensamiento espacial y geométrico - Figuras planas y sus propiedades"
+  },
+  {
+    "nombre": "Pensamiento espacial y geométrico - Perímetro y área de figuras básicas"
+  },
+  {
+    "nombre": "Pensamiento espacial y geométrico - Simetría y congruencia"
+  },
+  {
+    "nombre": "Pensamiento métrico - Sistema métrico decimal"
+  },
+  {
+    "nombre": "Pensamiento métrico - Conversiones de unidades básicas"
+  },
+  {
+    "nombre": "Pensamiento aleatorio - Recolección y organización de datos"
+  },
+  {
+    "nombre": "Pensamiento aleatorio - Tablas de frecuencia simples"
+  },
+  {
+    "nombre": "Pensamiento aleatorio - Gráficas de barras y pictogramas"
+  },
+  {
+    "nombre": "Pensamiento variacional - Expresiones algebraicas simples"
+  },
+  {
+    "nombre": "Pensamiento variacional - Patrones numéricos"
+  },
+  {
+    "nombre": "Entorno vivo (Biología) - Clasificación de los seres vivos"
+  },
+  {
+    "nombre": "Entorno vivo (Biología) - Estructura celular básica"
+  },
+  {
+    "nombre": "Entorno vivo (Biología) - Niveles de organización biológica"
+  },
+  {
+    "nombre": "Entorno vivo (Biología) - Ciclos de vida"
+  },
+  {
+    "nombre": "Entorno físico (Física básica) - Medición y magnitudes físicas"
+  },
+  {
+    "nombre": "Entorno físico (Física básica) - Conceptos de fuerza y movimiento"
+  },
+  {
+    "nombre": "Entorno físico (Física básica) - Máquinas simples"
+  },
+  {
+    "nombre": "Entorno químico (Química básica) - Estados de la materia"
+  },
+  {
+    "nombre": "Entorno químico (Química básica) - Cambios físicos y químicos"
+  },
+  {
+    "nombre": "Entorno químico (Química básica) - Mezclas y sustancias"
+  },
+  {
+    "nombre": "Ciencia, tecnología y sociedad - Recursos naturales"
+  },
+  {
+    "nombre": "Ciencia, tecnología y sociedad - Contaminación básica"
+  },
+  {
+    "nombre": "Historia - Culturas prehispánicas americanas"
+  },
+  {
+    "nombre": "Historia - Civilizaciones precolombinas (Mayas, Aztecas, Incas)"
+  },
+  {
+    "nombre": "Historia - Llegada de europeos a América"
+  },
+  {
+    "nombre": "Geografía - El planeta Tierra (estructura y movimientos)"
+  },
+  {
+    "nombre": "Geografía - Coordenadas geográficas"
+  },
+  {
+    "nombre": "Geografía - Continentes y océanos"
+  },
+  {
+    "nombre": "Geografía - Relieve y climas de América"
+  },
+  {
+    "nombre": "Democracia - Conceptos básicos de democracia"
+  },
+  {
+    "nombre": "Democracia - Derechos y deberes fundamentales"
+  },
+  {
+    "nombre": "Democracia - Gobierno escolar"
+  },
+  {
+    "nombre": "Vocabulario - Saludos y presentaciones (Inglés)"
+  },
+  {
+    "nombre": "Vocabulario - La familia y el entorno escolar (Inglés)"
+  },
+  {
+    "nombre": "Vocabulario - Números, colores y objetos cotidianos (Inglés)"
+  },
+  {
+    "nombre": "Gramática básica - Verbo \"to be\" en presente (Inglés)"
+  },
+  {
+    "nombre": "Gramática básica - Pronombres personales (Inglés)"
+  },
+  {
+    "nombre": "Gramática básica - Artículos y demostrativos (Inglés)"
+  },
+  {
+    "nombre": "Habilidades comunicativas - Comprensión de instrucciones básicas (Inglés)"
+  },
+  {
+    "nombre": "Habilidades comunicativas - Diálogos simples de presentación (Inglés)"
+  },
+  {
+    "nombre": "Habilidades comunicativas - Descripción básica de objetos (Inglés)"
+  },
+  {
+    "nombre": "Desarrollo motor - Habilidades motrices básicas"
+  },
+  {
+    "nombre": "Desarrollo motor - Coordinación dinámica general"
+  },
+  {
+    "nombre": "Desarrollo motor - Esquema corporal"
+  },
+  {
+    "nombre": "Formación deportiva inicial - Juegos predeportivos"
+  },
+  {
+    "nombre": "Formación deportiva inicial - Fundamentos de deportes colectivos"
+  },
+  {
+    "nombre": "Formación deportiva inicial - Normas básicas de juegos"
+  },
+  {
+    "nombre": "Expresión corporal - Ritmo y movimiento"
+  },
+  {
+    "nombre": "Expresión corporal - Juegos tradicionales"
+  },
+  {
+    "nombre": "Comprensión e interpretación textual - Lectura crítica inicial"
+  },
+  {
+    "nombre": "Comprensión e interpretación textual - Identificación de argumentos"
+  },
+  {
+    "nombre": "Comprensión e interpretación textual - Relaciones intertextuales básicas"
+  },
+  {
+    "nombre": "Producción textual - Textos expositivos simples"
+  },
+  {
+    "nombre": "Producción textual - Descripciones detalladas"
+  },
+  {
+    "nombre": "Producción textual - Uso de conectores básicos"
+  },
+  {
+    "nombre": "Literatura - Literatura colonial americana"
+  },
+  {
+    "nombre": "Literatura - Narrativa de aventuras"
+  },
+  {
+    "nombre": "Literatura - Poesía tradicional"
+  },
+  {
+    "nombre": "Gramática - Estructura de la oración simple"
+  },
+  {
+    "nombre": "Gramática - Modos verbales"
+  },
+  {
+    "nombre": "Gramática - Complementos del verbo"
+  },
+  {
+    "nombre": "Pensamiento numérico - Números racionales (fracciones y decimales)"
+  },
+  {
+    "nombre": "Pensamiento numérico - Proporcionalidad directa e inversa"
+  },
+  {
+    "nombre": "Pensamiento numérico - Porcentajes"
+  },
+  {
+    "nombre": "Pensamiento espacial y geométrico - Transformaciones en el plano"
+  },
+  {
+    "nombre": "Pensamiento espacial y geométrico - Ángulos (complementarios, suplementarios)"
+  },
+  {
+    "nombre": "Pensamiento espacial y geométrico - Polígonos regulares e irregulares"
+  },
+  {
+    "nombre": "Pensamiento métrico - Unidades de superficie y volumen"
+  },
+  {
+    "nombre": "Pensamiento métrico - Estimación de medidas"
+  },
+  {
+    "nombre": "Pensamiento aleatorio - Medidas de tendencia central"
+  },
+  {
+    "nombre": "Pensamiento aleatorio - Probabilidad de eventos simples"
+  },
+  {
+    "nombre": "Pensamiento variacional - Ecuaciones lineales con una incógnita"
+  },
+  {
+    "nombre": "Pensamiento variacional - Gráficas en el plano cartesiano"
+  },
+  {
+    "nombre": "Entorno vivo (Biología) - Ecosistemas terrestres y acuáticos"
+  },
+  {
+    "nombre": "Entorno vivo (Biología) - Cadenas y redes tróficas"
+  },
+  {
+    "nombre": "Entorno vivo (Biología) - Adaptaciones de los seres vivos"
+  },
+  {
+    "nombre": "Entorno vivo (Biología) - Taxonomía básica"
+  },
+  {
+    "nombre": "Entorno físico (Física básica) - Energía y sus transformaciones"
+  },
+  {
+    "nombre": "Entorno físico (Física básica) - Calor y temperatura"
+  },
+  {
+    "nombre": "Entorno físico (Física básica) - Ondas básicas"
+  },
+  {
+    "nombre": "Entorno químico (Química básica) - Tabla periódica introductoria"
+  },
+  {
+    "nombre": "Entorno químico (Química básica) - Átomo y moléculas básicas"
+  },
+  {
+    "nombre": "Entorno químico (Química básica) - Soluciones químicas simples"
+  },
+  {
+    "nombre": "Ciencia, tecnología y sociedad - Conservación ambiental"
+  },
+  {
+    "nombre": "Ciencia, tecnología y sociedad - Uso sostenible de recursos"
+  },
+  {
+    "nombre": "Historia - Colonización europea en América"
+  },
+  {
+    "nombre": "Historia - Sistema colonial"
+  },
+  {
+    "nombre": "Historia - Economía colonial"
+  },
+  {
+    "nombre": "Geografía - Regiones geográficas de Colombia"
+  },
+  {
+    "nombre": "Geografía - Demografía básica"
+  },
+  {
+    "nombre": "Geografía - Geografía económica introductoria"
+  },
+  {
+    "nombre": "Democracia - Organización del Estado colombiano"
+  },
+  {
+    "nombre": "Democracia - Participación ciudadana"
+  },
+  {
+    "nombre": "Democracia - Mecanismos de participación democrática"
+  },
+  {
+    "nombre": "Vocabulario - Actividades cotidianas y rutinas (Inglés)"
+  },
+  {
+    "nombre": "Vocabulario - Adjetivos descriptivos (Inglés)"
+  },
+  {
+    "nombre": "Vocabulario - Expresiones de tiempo (Inglés)"
+  },
+  {
+    "nombre": "Gramática - Presente simple y continuo (Inglés)"
+  },
+  {
+    "nombre": "Gramática - Adverbios de frecuencia (Inglés)"
+  },
+  {
+    "nombre": "Gramática - Preposiciones de lugar y tiempo (Inglés)"
+  },
+  {
+    "nombre": "Habilidades comunicativas - Descripción de personas y lugares (Inglés)"
+  },
+  {
+    "nombre": "Habilidades comunicativas - Expresión de gustos y preferencias (Inglés)"
+  },
+  {
+    "nombre": "Habilidades comunicativas - Redacción de párrafos cortos (Inglés)"
+  },
+  {
+    "nombre": "Desarrollo físico - Capacidades físicas básicas"
+  },
+  {
+    "nombre": "Desarrollo físico - Resistencia aeróbica"
+  },
+  {
+    "nombre": "Desarrollo físico - Flexibilidad"
+  },
+  {
+    "nombre": "Formación deportiva - Deportes colectivos (fútbol, baloncesto, voleibol)"
+  },
+  {
+    "nombre": "Formación deportiva - Técnicas básicas deportivas"
+  },
+  {
+    "nombre": "Formación deportiva - Reglamento básico deportivo"
+  },
+  {
+    "nombre": "Expresión corporal - Danzas folclóricas sencillas"
+  },
+  {
+    "nombre": "Expresión corporal - Representaciones escénicas simples"
+  },
+  {
+    "nombre": "Comprensión e interpretación textual - Análisis de textos informativos"
+  },
+  {
+    "nombre": "Comprensión e interpretación textual - Identificación de tesis y argumentos"
+  },
+  {
+    "nombre": "Comprensión e interpretación textual - Contexto histórico de textos"
+  },
+  {
+    "nombre": "Producción textual - Textos argumentativos básicos"
+  },
+  {
+    "nombre": "Producción textual - Informes y reseñas sencillas"
+  },
+  {
+    "nombre": "Producción textual - Coherencia y cohesión textual"
+  },
+  {
+    "nombre": "Literatura - Literatura universal clásica"
+  },
+  {
+    "nombre": "Literatura - Mitología griega y romana"
+  },
+  {
+    "nombre": "Literatura - Géneros dramáticos"
+  },
+  {
+    "nombre": "Gramática - Oraciones compuestas coordinadas"
+  },
+  {
+    "nombre": "Gramática - Uso de pronombres relativos"
+  },
+  {
+    "nombre": "Gramática - Signos de puntuación avanzados"
+  },
+  {
+    "nombre": "Pensamiento numérico - Números reales"
+  },
+  {
+    "nombre": "Pensamiento numérico - Potenciación y radicación"
+  },
+  {
+    "nombre": "Pensamiento numérico - Notación científica"
+  },
+  {
+    "nombre": "Pensamiento espacial y geométrico - Teorema de Pitágoras"
+  },
+  {
+    "nombre": "Pensamiento espacial y geométrico - Semejanza y congruencia de triángulos"
+  },
+  {
+    "nombre": "Pensamiento espacial y geométrico - Volumen de cuerpos geométricos"
+  },
+  {
+    "nombre": "Pensamiento métrico - Conversiones entre sistemas de medidas"
+  },
+  {
+    "nombre": "Pensamiento métrico - Área de figuras compuestas"
+  },
+  {
+    "nombre": "Pensamiento aleatorio - Técnicas de conteo"
+  },
+  {
+    "nombre": "Pensamiento aleatorio - Probabilidad de eventos compuestos"
+  },
+  {
+    "nombre": "Pensamiento aleatorio - Tablas de frecuencia con datos agrupados"
+  },
+  {
+    "nombre": "Pensamiento variacional - Funciones lineales"
+  },
+  {
+    "nombre": "Pensamiento variacional - Sistemas de ecuaciones lineales 2x2"
+  },
+  {
+    "nombre": "Pensamiento variacional - Pendiente e interceptos"
+  },
+  {
+    "nombre": "Entorno vivo (Biología) - Estructura y función celular"
+  },
+  {
+    "nombre": "Entorno vivo (Biología) - Reproducción celular (mitosis y meiosis)"
+  },
+  {
+    "nombre": "Entorno vivo (Biología) - Sistemas del cuerpo humano (digestivo, respiratorio)"
+  },
+  {
+    "nombre": "Entorno vivo (Biología) - Genética mendeliana básica"
+  },
+  {
+    "nombre": "Entorno físico (Física básica) - Cinemática unidimensional"
+  },
+  {
+    "nombre": "Entorno físico (Física básica) - Leyes de Newton básicas"
+  },
+  {
+    "nombre": "Entorno físico (Física básica) - Trabajo, potencia y energía"
+  },
+  {
+    "nombre": "Entorno químico (Química básica) - Estructura atómica"
+  },
+  {
+    "nombre": "Entorno químico (Química básica) - Tabla periódica (propiedades periódicas)"
+  },
+  {
+    "nombre": "Entorno químico (Química básica) - Enlaces químicos básicos"
+  },
+  {
+    "nombre": "Entorno químico (Química básica) - Reacciones químicas sencillas"
+  },
+  {
+    "nombre": "Ciencia, tecnología y sociedad - Avances científicos y su impacto"
+  },
+  {
+    "nombre": "Historia - Historia medieval europea"
+  },
+  {
+    "nombre": "Historia - Renacimiento y Humanismo"
+  },
+  {
+    "nombre": "Historia - Reformas religiosas"
+  },
+  {
+    "nombre": "Geografía - Desarrollo económico y social mundial"
+  },
+  {
+    "nombre": "Geografía - Sectores económicos"
+  },
+  {
+    "nombre": "Geografía - Geografía poblacional"
+  },
+  {
+    "nombre": "Democracia - Constitución Política de Colombia"
+  },
+  {
+    "nombre": "Democracia - Ramas del poder público"
+  },
+  {
+    "nombre": "Democracia - Derechos humanos fundamentales"
+  },
+  {
+    "nombre": "Vocabulario - Alimentos y comidas (Inglés)"
+  },
+  {
+    "nombre": "Vocabulario - Lugares y ubicaciones (Inglés)"
+  },
+  {
+    "nombre": "Vocabulario - Ocupaciones y oficios (Inglés)"
+  },
+  {
+    "nombre": "Gramática - Pasado simple y continuo (Inglés)"
+  },
+  {
+    "nombre": "Gramática - Comparativos y superlativos (Inglés)"
+  },
+  {
+    "nombre": "Gramática - Futuro con \"going to\" y \"will\" (Inglés)"
+  },
+  {
+    "nombre": "Habilidades comunicativas - Narración de hechos pasados (Inglés)"
+  },
+  {
+    "nombre": "Habilidades comunicativas - Elaboración de planes futuros (Inglés)"
+  },
+  {
+    "nombre": "Habilidades comunicativas - Comprensión de textos cortos (Inglés)"
+  },
+  {
+    "nombre": "Desarrollo físico - Entrenamiento de resistencia"
+  },
+  {
+    "nombre": "Desarrollo físico - Desarrollo de la fuerza"
+  },
+  {
+    "nombre": "Desarrollo físico - Velocidad de reacción"
+  },
+  {
+    "nombre": "Formación deportiva - Deportes individuales (atletismo básico)"
+  },
+  {
+    "nombre": "Formación deportiva - Estrategias básicas de juego"
+  },
+  {
+    "nombre": "Formación deportiva - Arbitraje elemental"
+  },
+  {
+    "nombre": "Expresión corporal - Coreografías simples"
+  },
+  {
+    "nombre": "Expresión corporal - Composiciones gimnásticas básicas"
+  },
+  {
+    "nombre": "Comprensión e interpretación textual - Análisis de textos científicos y periodísticos"
+  },
+  {
+    "nombre": "Comprensión e interpretación textual - Identificación de posturas ideológicas"
+  },
+  {
+    "nombre": "Comprensión e interpretación textual - Intertextualidad y contexto"
+  },
+  {
+    "nombre": "Producción textual - Ensayo argumentativo estructurado"
+  },
+  {
+    "nombre": "Producción textual - Textos periodísticos básicos"
+  },
+  {
+    "nombre": "Producción textual - Protocolos de presentación de trabajos"
+  },
+  {
+    "nombre": "Literatura - Literatura del Romanticismo y Realismo"
+  },
+  {
+    "nombre": "Literatura - Novela latinoamericana del siglo XIX"
+  },
+  {
+    "nombre": "Literatura - Análisis de obras representativas"
+  },
+  {
+    "nombre": "Gramática - Oraciones subordinadas"
+  },
+  {
+    "nombre": "Gramática - Análisis sintáctico completo"
+  },
+  {
+    "nombre": "Gramática - Marcadores textuales"
+  },
+  {
+    "nombre": "Pensamiento numérico - Números reales (operaciones avanzadas)"
+  },
+  {
+    "nombre": "Pensamiento numérico - Sucesiones y series"
+  },
+  {
+    "nombre": "Pensamiento numérico - Progresiones aritméticas y geométricas"
+  },
+  {
+    "nombre": "Pensamiento espacial y geométrico - Transformaciones geométricas"
+  },
+  {
+    "nombre": "Pensamiento espacial y geométrico - Círculo y circunferencia (propiedades)"
+  },
+  {
+    "nombre": "Pensamiento espacial y geométrico - Geometría analítica básica"
+  },
+  {
+    "nombre": "Pensamiento métrico - Proporcionalidad geométrica"
+  },
+  {
+    "nombre": "Pensamiento métrico - Teorema de Thales"
+  },
+  {
+    "nombre": "Pensamiento aleatorio - Medidas de dispersión"
+  },
+  {
+    "nombre": "Pensamiento aleatorio - Intervalos de confianza básicos"
+  },
+  {
+    "nombre": "Pensamiento aleatorio - Análisis estadístico de datos"
+  },
+  {
+    "nombre": "Pensamiento variacional - Funciones cuadráticas"
+  },
+  {
+    "nombre": "Pensamiento variacional - Sistemas de ecuaciones 3x3"
+  },
+  {
+    "nombre": "Pensamiento variacional - Inecuaciones lineales"
+  },
+  {
+    "nombre": "Entorno vivo (Biología) - Teorías de la evolución"
+  },
+  {
+    "nombre": "Entorno vivo (Biología) - Selección natural y adaptación"
+  },
+  {
+    "nombre": "Entorno vivo (Biología) - Sistemas del cuerpo humano (circulatorio, nervioso, endocrino)"
+  },
+  {
+    "nombre": "Entorno físico (Física) - Dinámica"
+  },
+  {
+    "nombre": "Entorno físico (Física) - Estática básica"
+  },
+  {
+    "nombre": "Entorno físico (Física) - Fundamentos de hidrostática"
+  },
+  {
+    "nombre": "Entorno químico (Química) - Estequiometría básica"
+  },
+  {
+    "nombre": "Entorno químico (Química) - Soluciones químicas (concentraciones)"
+  },
+  {
+    "nombre": "Entorno químico (Química) - Equilibrio químico introductorio"
+  },
+  {
+    "nombre": "Ciencia, tecnología y sociedad - Biotecnología básica"
+  },
+  {
+    "nombre": "Ciencia, tecnología y sociedad - Problemas ambientales globales"
+  },
+  {
+    "nombre": "Historia - Revoluciones burguesas (Americana, Francesa)"
+  },
+  {
+    "nombre": "Historia - Revolución Industrial"
+  },
+  {
+    "nombre": "Historia - Independencias latinoamericanas"
+  },
+  {
+    "nombre": "Geografía - Geografía política mundial"
+  },
+  {
+    "nombre": "Geografía - Geopolítica básica"
+  },
+  {
+    "nombre": "Geografía - Recursos naturales y desarrollo"
+  },
+  {
+    "nombre": "Democracia - Sistemas políticos comparados"
+  },
+  {
+    "nombre": "Democracia - Estado social de derecho"
+  },
+  {
+    "nombre": "Democracia - Mecanismos de protección de derechos"
+  },
+  {
+    "nombre": "Vocabulario - Viajes y turismo (Inglés)"
+  },
+  {
+    "nombre": "Vocabulario - Medios de comunicación (Inglés)"
+  },
+  {
+    "nombre": "Vocabulario - Medio ambiente (Inglés)"
+  },
+  {
+    "nombre": "Gramática - Presente perfecto (Inglés)"
+  },
+  {
+    "nombre": "Gramática - Modales básicos (can, should, must) (Inglés)"
+  },
+  {
+    "nombre": "Gramática - Voz pasiva simple (Inglés)"
+  },
+  {
+    "nombre": "Habilidades comunicativas - Expresión de opiniones (Inglés)"
+  },
+  {
+    "nombre": "Habilidades comunicativas - Redacción de cartas informales (Inglés)"
+  },
+  {
+    "nombre": "Habilidades comunicativas - Exposiciones orales cortas (Inglés)"
+  },
+  {
+    "nombre": "Desarrollo físico - Sistemas de entrenamiento"
+  },
+  {
+    "nombre": "Desarrollo físico - Planificación de actividad física"
+  },
+  {
+    "nombre": "Desarrollo físico - Evaluación de condición física"
+  },
+  {
+    "nombre": "Formación deportiva - Deportes de conjunto avanzados"
+  },
+  {
+    "nombre": "Formación deportiva - Deportes alternativos"
+  },
+  {
+    "nombre": "Formación deportiva - Programación deportiva"
+  },
+  {
+    "nombre": "Expresión corporal - Montajes coreográficos"
+  },
+  {
+    "nombre": "Expresión corporal - Expresión rítmica avanzada"
+  },
+  {
+    "nombre": "Comprensión e interpretación textual - Análisis del discurso"
+  },
+  {
+    "nombre": "Comprensión e interpretación textual - Textos filosóficos y científicos"
+  },
+  {
+    "nombre": "Comprensión e interpretación textual - Macroestructuras textuales"
+  },
+  {
+    "nombre": "Producción textual - Ensayo de carácter crítico"
+  },
+  {
+    "nombre": "Producción textual - Textos argumentativos complejos"
+  },
+  {
+    "nombre": "Producción textual - Reseñas críticas"
+  },
+  {
+    "nombre": "Literatura - Literatura colombiana (desde la Colonia hasta el siglo XX)"
+  },
+  {
+    "nombre": "Literatura - Movimientos literarios colombianos"
+  },
+  {
+    "nombre": "Literatura - Análisis de autores representativos"
+  },
+  {
+    "nombre": "Gramática y lingüística - Semántica y pragmática"
+  },
+  {
+    "nombre": "Gramática y lingüística - Análisis del discurso"
+  },
+  {
+    "nombre": "Gramática y lingüística - Variantes lingüísticas"
+  },
+  {
+    "nombre": "Trigonometría - Ángulos y triángulos - Sistemas de medición angular"
+  },
+  {
+    "nombre": "Trigonometría - Ángulos y triángulos - Teorema del seno y coseno"
+  },
+  {
+    "nombre": "Trigonometría - Ángulos y triángulos - Solución de triángulos"
+  },
+  {
+    "nombre": "Trigonometría - Funciones trigonométricas - Funciones seno, coseno, tangente"
+  },
+  {
+    "nombre": "Trigonometría - Funciones trigonométricas - Gráficas de funciones trigonométricas"
+  },
+  {
+    "nombre": "Trigonometría - Funciones trigonométricas - Ecuaciones trigonométricas básicas"
+  },
+  {
+    "nombre": "Trigonometría - Identidades trigonométricas - Identidades fundamentales"
+  },
+  {
+    "nombre": "Trigonometría - Identidades trigonométricas - Identidades de suma y diferencia"
+  },
+  {
+    "nombre": "Trigonometría - Identidades trigonométricas - Identidades de ángulo doble"
+  },
+  {
+    "nombre": "Trigonometría - Geometría analítica básica - La recta en el plano"
+  },
+  {
+    "nombre": "Trigonometría - Geometría analítica básica - La circunferencia"
+  },
+  {
+    "nombre": "Trigonometría - Geometría analítica básica - Secciones cónicas (parábola)"
+  },
+  {
+    "nombre": "Cinemática - Movimiento rectilíneo uniforme"
+  },
+  {
+    "nombre": "Cinemática - Movimiento rectilíneo uniformemente acelerado"
+  },
+  {
+    "nombre": "Cinemática - Movimiento circular uniforme"
+  },
+  {
+    "nombre": "Cinemática - Movimiento parabólico"
+  },
+  {
+    "nombre": "Dinámica - Leyes de Newton (aplicaciones)"
+  },
+  {
+    "nombre": "Dinámica - Fuerzas de rozamiento"
+  },
+  {
+    "nombre": "Dinámica - Trabajo y energía"
+  },
+  {
+    "nombre": "Dinámica - Conservación de la energía mecánica"
+  },
+  {
+    "nombre": "Estática - Equilibrio de los cuerpos"
+  },
+  {
+    "nombre": "Estática - Momento de una fuerza"
+  },
+  {
+    "nombre": "Estática - Centro de gravedad"
+  },
+  {
+    "nombre": "Estequiometría - Leyes ponderales"
+  },
+  {
+    "nombre": "Estequiometría - Cálculos estequiométricos"
+  },
+  {
+    "nombre": "Estequiometría - Reactivo límite y rendimiento"
+  },
+  {
+    "nombre": "Soluciones - Tipos de soluciones"
+  },
+  {
+    "nombre": "Soluciones - Concentraciones físicas y químicas"
+  },
+  {
+    "nombre": "Soluciones - Propiedades coligativas básicas"
+  },
+  {
+    "nombre": "Gases - Leyes de los gases"
+  },
+  {
+    "nombre": "Gases - Teoría cinético-molecular"
+  },
+  {
+    "nombre": "Gases - Ecuación de estado de gases ideales"
+  },
+  {
+    "nombre": "Equilibrio químico - Constante de equilibrio"
+  },
+  {
+    "nombre": "Equilibrio químico - Principio de Le Chatelier"
+  },
+  {
+    "nombre": "Equilibrio químico - Equilibrio ácido-base"
+  },
+  {
+    "nombre": "Economía - Conceptos básicos económicos"
+  },
+  {
+    "nombre": "Economía - Historia del pensamiento económico"
+  },
+  {
+    "nombre": "Economía - Sectores económicos"
+  },
+  {
+    "nombre": "Economía - Sistema económico colombiano"
+  },
+  {
+    "nombre": "Ciencias Políticas - Teorías políticas clásicas"
+  },
+  {
+    "nombre": "Ciencias Políticas - Estructura del Estado colombiano"
+  },
+  {
+    "nombre": "Ciencias Políticas - Organismos de control"
+  },
+  {
+    "nombre": "Ciencias Políticas - Políticas públicas"
+  },
+  {
+    "nombre": "Historia de la filosofía antigua - Presocráticos"
+  },
+  {
+    "nombre": "Historia de la filosofía antigua - Sócrates, Platón y Aristóteles"
+  },
+  {
+    "nombre": "Historia de la filosofía antigua - Filosofía helenística"
+  },
+  {
+    "nombre": "Problemas filosóficos - Ontología básica"
+  },
+  {
+    "nombre": "Problemas filosóficos - Teoría del conocimiento"
+  },
+  {
+    "nombre": "Problemas filosóficos - Antropología filosófica"
+  },
+  {
+    "nombre": "Vocabulario - Tecnología y ciencia (Inglés)"
+  },
+  {
+    "nombre": "Vocabulario - Problemáticas sociales (Inglés)"
+  },
+  {
+    "nombre": "Vocabulario - Cultura y sociedad (Inglés)"
+  },
+  {
+    "nombre": "Gramática - Condicionales (tipos 0, 1 y 2) (Inglés)"
+  },
+  {
+    "nombre": "Gramática - Reported Speech básico (Inglés)"
+  },
+  {
+    "nombre": "Gramática - Presente perfecto continuo (Inglés)"
+  },
+  {
+    "nombre": "Habilidades comunicativas - Redacción de ensayos cortos (Inglés)"
+  },
+  {
+    "nombre": "Habilidades comunicativas - Debates estructurados (Inglés)"
+  },
+  {
+    "nombre": "Habilidades comunicativas - Comprensión de textos académicos (Inglés)"
+  },
+  {
+    "nombre": "Entrenamiento avanzado - Principios de entrenamiento"
+  },
+  {
+    "nombre": "Entrenamiento avanzado - Planificación deportiva"
+  },
+  {
+    "nombre": "Entrenamiento avanzado - Evaluación de capacidades físicas"
+  },
+  {
+    "nombre": "Deportes - Reglamentación deportiva avanzada"
+  },
+  {
+    "nombre": "Deportes - Fundamentos tácticos"
+  },
+  {
+    "nombre": "Deportes - Organización de eventos deportivos"
+  },
+  {
+    "nombre": "Expresión corporal - Composiciones gimnásticas complejas"
+  },
+  {
+    "nombre": "Expresión corporal - Actividades rítmicas avanzadas"
+  },
+  {
+    "nombre": "Comprensión e interpretación textual - Literatura contemporánea mundial"
+  },
+  {
+    "nombre": "Comprensión e interpretación textual - Análisis crítico de medios de comunicación"
+  },
+  {
+    "nombre": "Comprensión e interpretación textual - Intertextualidad avanzada"
+  },
+  {
+    "nombre": "Producción textual - Textos académicos complejos"
+  },
+  {
+    "nombre": "Producción textual - Protocolos de investigación"
+  },
+  {
+    "nombre": "Producción textual - Escritura creativa avanzada"
+  },
+  {
+    "nombre": "Literatura - Literatura latinoamericana del siglo XX"
+  },
+  {
+    "nombre": "Literatura - Boom latinoamericano"
+  },
+  {
+    "nombre": "Literatura - Literatura contemporánea"
+  },
+  {
+    "nombre": "Lingüística - Análisis del discurso avanzado"
+  },
+  {
+    "nombre": "Lingüística - Psicolingüística básica"
+  },
+  {
+    "nombre": "Lingüística - Sociolingüística"
+  },
+  {
+    "nombre": "Cálculo - Límites y continuidad - Concepto de límite"
+  },
+  {
+    "nombre": "Cálculo - Límites y continuidad - Propiedades de los límites"
+  },
+  {
+    "nombre": "Cálculo - Límites y continuidad - Continuidad de funciones"
+  },
+  {
+    "nombre": "Cálculo - Derivadas - Concepto de derivada"
+  },
+  {
+    "nombre": "Cálculo - Derivadas - Reglas de derivación"
+  },
+  {
+    "nombre": "Cálculo - Derivadas - Aplicaciones de la derivada"
+  },
+  {
+    "nombre": "Cálculo - Integrales - Integral indefinida"
+  },
+  {
+    "nombre": "Cálculo - Integrales - Métodos de integración básicos"
+  },
+  {
+    "nombre": "Cálculo - Integrales - Integral definida"
+  },
+  {
+    "nombre": "Cálculo - Integrales - Aplicaciones de la integral"
+  },
+  {
+    "nombre": "Cálculo - Geometría analítica avanzada - Elipse e hipérbola"
+  },
+  {
+    "nombre": "Cálculo - Geometría analítica avanzada - Ecuaciones paramétricas"
+  },
+  {
+    "nombre": "Ondas - Movimiento ondulatorio"
+  },
+  {
+    "nombre": "Ondas - Ondas sonoras"
+  },
+  {
+    "nombre": "Ondas - Efecto Doppler"
+  },
+  {
+    "nombre": "Electricidad - Carga eléctrica"
+  },
+  {
+    "nombre": "Electricidad - Ley de Coulomb"
+  },
+  {
+    "nombre": "Electricidad - Campo eléctrico"
+  },
+  {
+    "nombre": "Electricidad - Circuitos eléctricos"
+  },
+  {
+    "nombre": "Magnetismo - Campo magnético"
+  },
+  {
+    "nombre": "Magnetismo - Inducción electromagnética"
+  },
+  {
+    "nombre": "Magnetismo - Ondas electromagnéticas"
+  },
+  {
+    "nombre": "Física moderna (introductoria) - Teoría de la relatividad especial"
+  },
+  {
+    "nombre": "Física moderna (introductoria) - Física cuántica básica"
+  },
+  {
+    "nombre": "Química orgánica - Hidrocarburos"
+  },
+  {
+    "nombre": "Química orgánica - Grupos funcionales"
+  },
+  {
+    "nombre": "Química orgánica - Nomenclatura orgánica"
+  },
+  {
+    "nombre": "Química orgánica - Isomería"
+  },
+  {
+    "nombre": "Cinética química - Velocidad de reacción"
+  },
+  {
+    "nombre": "Cinética química - Factores que afectan la velocidad"
+  },
+  {
+    "nombre": "Cinética química - Teoría de colisiones"
+  },
+  {
+    "nombre": "Electroquímica - Reacciones redox"
+  },
+  {
+    "nombre": "Electroquímica - Celdas galvánicas"
+  },
+  {
+    "nombre": "Electroquímica - Electrólisis"
+  },
+  {
+    "nombre": "Bioquímica básica - Carbohidratos, lípidos, proteínas"
+  },
+  {
+    "nombre": "Bioquímica básica - Enzimas y metabolismo"
+  },
+  {
+    "nombre": "Economía - Indicadores económicos"
+  },
+  {
+    "nombre": "Economía - Globalización"
+  },
+  {
+    "nombre": "Economía - Desarrollo sostenible"
+  },
+  {
+    "nombre": "Ciencias Políticas - Relaciones internacionales"
+  },
+  {
+    "nombre": "Ciencias Políticas - Organismos multilaterales"
+  },
+  {
+    "nombre": "Ciencias Políticas - Conflictos contemporáneos"
+  },
+  {
+    "nombre": "Historia de la filosofía moderna - Racionalismo y empirismo"
+  },
+  {
+    "nombre": "Historia de la filosofía moderna - Kant y el idealismo alemán"
+  },
+  {
+    "nombre": "Historia de la filosofía moderna - Filosofía contemporánea"
+  },
+  {
+    "nombre": "Problemas filosóficos avanzados - Ética y moral"
+  },
+  {
+    "nombre": "Problemas filosóficos avanzados - Estética"
+  },
+  {
+    "nombre": "Problemas filosóficos avanzados - Filosofía política"
+  },
+  {
+    "nombre": "Problemas filosóficos avanzados - Filosofía de la ciencia"
+  },
+  {
+    "nombre": "Vocabulario - Temas académicos especializados (Inglés)"
+  },
+  {
+    "nombre": "Vocabulario - Expresiones idiomáticas (Inglés)"
+  },
+  {
+    "nombre": "Vocabulario - Lenguaje formal e informal (Inglés)"
+  },
+  {
+    "nombre": "Gramática - Condicionales tipo 3 (Inglés)"
+  },
+  {
+    "nombre": "Gramática - Reported speech avanzado (Inglés)"
+  },
+  {
+    "nombre": "Gramática - Estructuras pasivas complejas (Inglés)"
+  },
+  {
+    "nombre": "Habilidades comunicativas - Ensayos argumentativos (Inglés)"
+  },
+  {
+    "nombre": "Habilidades comunicativas - Presentaciones formales (Inglés)"
+  },
+  {
+    "nombre": "Habilidades comunicativas - Preparación para exámenes internacionales (Inglés)"
+  },
+  {
+    "nombre": "Administración deportiva - Organización de torneos"
+  },
+  {
+    "nombre": "Administración deportiva - Planificación de programas deportivos"
+  },
+  {
+    "nombre": "Administración deportiva - Proyectos deportivos comunitarios"
+  },
+  {
+    "nombre": "Salud y bienestar - Estilos de vida saludables"
+  },
+  {
+    "nombre": "Salud y bienestar - Prevención de lesiones"
+  },
+  {
+    "nombre": "Salud y bienestar - Primeros auxilios básicos"
+  },
+  {
+    "nombre": "Deporte y sociedad - Ética deportiva"
+  },
+  {
+    "nombre": "Deporte y sociedad - Deporte y cultura"
+  },
+  {
+    "nombre": "Deporte y sociedad - Liderazgo deportivo"
+  }
+]

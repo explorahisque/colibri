@@ -1,0 +1,652 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Oxanium';
+  src: url('assets/fonts/Oxanium-VariableFont_wght.ttf') format('woff2'),
+       url('assets/fonts/Oxanium-VariableFont_wght.ttf') format('woff');
+}
+
+/* 🎨 Paleta de colores 2030 */
+:root {
+  --primary-bg: #4A2F3D;          /* Rosado oscuro, poco saturado */
+  --accent-color: #6D3F53;        /* Rosado más saturado para acentos */
+  --primary-text: #EDE1E7;        /* Blanco suave con leve tinte rosado */
+  --accent-color-tra: #7A4660;    /* Variante semitransparente del acento */
+  --secondary-accent: #875A71;    /* Rosado claro */
+  --secondary-accent-tra: #5D3D4C4D;
+  --secondary-text: #D1B4C2;      /* Rosado grisáceo para texto secundario */
+  --secondary-text-tra: #EDE1E7;  /* Igual que primary-text */
+  --primary-bg-tra: #3D2532;      /* Rosado oscuro más profundo */
+  --light-text: #f78fc3;          /* Texto claro con tinte rosado */
+  --card-bg: #7A4660;             /* Similar al acento para unificarse */
+  --card-bg-tra: #7A4660;         /* Versión con transparencia */
+  --shadow: #EDE1E74D;            /* Sombra leve en tono rosado */
+  --transparent-bg: #2A1D25;      /* Fondo sutilmente rosado y oscuro */
+}
+
+
+/* Paleta por defecto Conocimiento */
+.conocimiento {
+  --primary-bg: #4A2F3D;          /* Rosado oscuro, poco saturado */
+  --accent-color: #6D3F53;        /* Rosado más saturado para acentos */
+  --primary-text: #EDE1E7;        /* Blanco suave con leve tinte rosado */
+  --accent-color-tra: #7A4660;    /* Variante semitransparente del acento */
+  --secondary-accent: #875A71;    /* Rosado claro */
+  --secondary-accent-tra: #5D3D4C;
+  --secondary-text: #D1B4C2;      /* Rosado grisáceo para texto secundario */
+  --secondary-text-tra: #EDE1E7;  /* Igual que primary-text */
+  --primary-bg-tra: #3D2532;      /* Rosado oscuro más profundo */
+  --light-text: #f78fc3;          /* Texto claro con tinte rosado */
+  --card-bg: #7A4660;             /* Similar al acento para unificarse */
+  --card-bg-tra: #7A4660;         /* Versión con transparencia */
+  --shadow: #EDE1E74D;            /* Sombra leve en tono rosado */
+  --transparent-bg: #2A1D25;      /* Fondo sutilmente rosado y oscuro */
+}
+
+
+/* Paleta alternativa Her OS */
+.arcilla {
+    --primary-bg: #C1493C;           /* Rojo ladrillo cálido */
+    --accent-color: #ae2618;         /* Rojo más claro y suave para acentos */
+    --primary-text: #F5E4D7;         /* Beige muy claro, casi blanco */
+    --accent-color-tra: #D5624A;     /* Acento igual pero translúcido */
+    --secondary-accent: #E58E73;     /* Salmón apagado */
+    --secondary-accent-tra: #D37763; /* Salmón un poco más oscuro */
+    --secondary-text: #F2CFC0;       /* Beige con toque rosado */
+    --secondary-text-tra: #F5E4D7;   /* Similar a primary text */
+    --primary-bg-tra: #A23C32;       /* Rojo más oscuro, profundo */
+    --light-text: #f8c39a;           /* Texto claro */
+    --card-bg: #D5624A;              /* Igual al accent color */
+    --card-bg-tra: #D5624A;
+    --shadow: #F5E4D740;             /* Sombra ligera y cálida */
+    --transparent-bg: #8C3329;       /* Fondo oscuro translúcido */
+  }
+
+/* Bosque */
+.bosque {
+  --primary-bg: #48634A;          /* Verde oscuro, poco saturado */
+  --accent-color: #355c42;        /* Verde oscuro, más saturado */
+  --primary-text: #E1EDE7;        /* Blanco suave con leve tinte verde */
+  --accent-color-tra: #3B5744;
+  --secondary-accent: #678576;   /* Verde claro */
+  --secondary-accent-tra: #465D52;
+  --secondary-text: #b4d1c2;
+  --secondary-text-tra: #E1EDE7;
+  --primary-bg-tra: #2B3D35;     /* Verde oscuro, más oscuro */
+  --light-text: #abfad2;
+  --card-bg: #3B5744;
+  --card-bg-tra: #3B5744;
+  --shadow: #E1EDE7;
+  --transparent-bg: #25362a; 
+}
+
+
+/* Índigo */
+.indigo {
+  --primary-bg: #2C3E50;           /* Azul oscuro con matiz grisáceo */
+  --accent-color: #3F5E72;         /* Azul medio, sobrio y elegante */
+  --primary-text: #E1EBF0;         /* Azul muy claro casi blanco, lectura */
+  --accent-color-tra: #3F5E72;     /* Acento igual translúcido */
+  --secondary-accent: #5C7A91;     /* Azul grisáceo más claro */
+  --secondary-accent-tra: #4A6A81; /* Variante más profunda */
+  --secondary-text: #B6C9D3;       /* Azul pálido y legible */
+  --secondary-text-tra: #E1EBF0;   /* Texto claro para transiciones */
+  --primary-bg-tra: #22313D;       /* Azul muy oscuro, fondo profundo */
+  --light-text: #a5ddf8;           /* Texto claro para contraste */
+  --card-bg: #3F5E72;              /* Fondo de tarjetas */
+  --card-bg-tra: #3F5E72;
+  --shadow: #E1EBF040;             /* Sombra azulada muy suave */
+  --transparent-bg: #1B2A33;       /* Fondo translúcido oscuro */
+}
+
+/* Raíces */
+.raices {
+  --primary-bg: #5A4C2F;           /* Amarillo mostaza oscuro, base */
+  --accent-color: #7A653C;         /* Amarillo tierra más cálido */
+  --primary-text: #F5F1E3;         /* Crema claro para buena lectura */
+  --accent-color-tra: #7A653C;
+  --secondary-accent: #b3914a;     /* Amarillo dorado suave */
+  --secondary-accent-tra: #7C6A49;
+  --secondary-text: #CFC4A3;       /* Beige pálido, legible */
+  --secondary-text-tra: #F5F1E3;
+  --primary-bg-tra: #4A3E29;       /* Más oscuro para fondos profundos */
+  --light-text: #fae7a2;
+  --card-bg: #7A653C;              /* Fondo de tarjeta con calidez */
+  --card-bg-tra: #7A653C;
+  --shadow: #F5F1E340;             /* Sombra clara y suave */
+  --transparent-bg: #3E331F;       /* Fondo translúcido cálido */
+}
+
+/* Paleta monocromático oscuro */
+.carbon {
+  --primary-bg: #1C1C1C;
+  --primary-bg-tra: #1C1C1C;
+  --primary-text: #FFFFFF;
+  --primary-text-tra: #FFFFFF;
+  --accent-color: #3C3C3C;
+  --accent-color-tra: #3C3C3C;
+  --secondary-accent: #121212;
+  --secondary-accent-tra: #121212;
+  --secondary-text: #CCCCCC;
+  --secondary-text-tra: #CCCCCC;
+  --light-text: rgba(255, 255, 255, 0.8);
+  --card-bg: #3C3C3C;
+  --card-bg-tra: #3C3C3C;
+  --shadow: rgba(255, 255, 255, 0.3);
+  --transparent-bg: rgba(28, 28, 28, 0.1);
+  /* ...otras variables si se requieren... */
+}
+
+/* Sumi-e */
+.light-mode {
+  --primary-bg: #F5F5F5;
+  --primary-bg-tra: #F5F5F5;
+  --primary-text: #333333;
+  --primary-text-tra: #333333;
+  --accent-color: #D3D3D3;
+  --accent-color-tra: #D3D3D3;
+  --secondary-accent: #E0E0E0;
+  --secondary-accent-tra: #E0E0E0;
+  --secondary-text: #666666;
+  --secondary-text-tra: #666666;
+  --light-text: rgba(51, 51, 51, 0.8);
+  --card-bg: #D3D3D3;
+  --card-bg-tra: #D3D3D3;
+  --shadow: rgba(51, 51, 51, 0.3);
+  --transparent-bg: rgba(245, 245, 245, 0.1);
+  /* ...otras variables si se requieren... */
+}
+
+.dark-mode {
+  --primary-bg: #1A1B2E;           /* Azul oscuro profundo, base */
+  --accent-color: #FF4F8B;         /* Rosa neón vibrante pero legible */
+  --primary-text: #E7EAF2;         /* Blanco azulado para contraste */
+  --accent-color-tra: #FF4F8B;
+  --secondary-accent: #4da58c;     /* Verde agua neón pastel */
+  --secondary-accent-tra: #47B9A2;
+  --secondary-text: #A7B6D2;       /* Azul grisáceo claro */
+  --secondary-text-tra: #E7EAF2;
+  --primary-bg-tra: #121322;       /* Más oscuro aún, para profundidad */
+  --light-text: #E7EAF2;
+  --card-bg: #292C47;              /* Azul grisáceo oscuro */
+  --card-bg-tra: #292C47;
+  --shadow: #FF4F8B40;             /* Sombra en rosa vibrante, translúcida */
+  --transparent-bg: #1A1B2EB3;     /* Fondo translúcido oscuro */
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(90deg, var(--primary-bg), var(--accent-color));
+  color: var(--primary-text);
+  transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(10px); /* Efecto moderno */
+  font-family: 'Oxanium', sans-serif;
+  scrollbar-color: var(--secondary-accent) var(--accent-color);
+}
+.barra-superior {
+  background: var(--primary-bg);
+  background-color: var(--primary-bg);
+  z-index: 50;
+}
+
+.boton-icono {
+  position: relative;
+  background-color: transparent;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.boton-icono:hover,
+.boton-icono:focus {
+  background-color: var(--primary-bg-tra);
+  outline: none;
+}
+
+.boton-icono:focus .tooltip,
+.boton-icono:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tooltip {
+  position: absolute;
+  top: 125%; /* 🔄 Cambia bottom por top */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--secondary-accent);
+  color: var(--primary-text);
+  padding: 6px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  font-size: 0.75rem;
+  z-index: 10;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: 100%; /* 🔄 Ahora la flecha apunta hacia arriba */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: var(--secondary-accent) transparent transparent transparent;
+}
+
+.fondo {
+  padding: 5% 3%;
+}
+
+/* Tipografía */
+h1, h2, h3, h4, h5, h6 {
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: lighter;
+}
+
+h2 {
+  font-size: 1.3rem;
+  /* font-weight: lighter; */
+}
+
+a {
+  font-weight: 600;
+  color: var(--primary-text);
+}
+a:hover {
+  text-decoration: underline;
+}
+/* Botones futuristas */
+button {
+  white-space: nowrap;
+  padding: 10px 10px;
+  border-radius: 100px;
+  /* border-right: #f8f8f8 solid; */
+  /* border-left: #f8f8f8 solid; */
+  cursor: pointer;
+  background: var(--secondary-accent);
+  border: 0.2rem solid var(--secondary-accent);
+  padding: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0px 2px 4px var(--card-bg);
+  transition: transform 0.3s ease-in-out;
+  border-bottom-left-radius: 0;
+}
+
+button:hover {
+  transform: scale(1.025);
+  background: var(--accent-color);
+}
+
+button:active {
+  transform: scale(0.95);
+  background: var(--secondary-accent-tra);
+}
+button.logo {
+  border: solid;
+  padding: 5px;
+}
+
+.enter-button {
+  background: var(--primary-bg-tra);
+  color: var(--primary-text);
+  margin: 0;
+  height: max-content;
+  border: none;
+  padding: 1rem;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.btn-filtro-activo {
+  background: var(--accent-color);
+  border-radius: 100px;
+  border-bottom-right-radius: 0;
+}
+
+.dashboard {
+  justify-items: center;
+}
+
+/* Slideshow de fondo */
+
+.slideshow-container {
+  background-color: #121212a4;
+}
+
+.slideshow div {
+  filter: blur(2px) contrast(0.4);
+}
+
+/* 🌟 Input futurista */
+
+.login-container {
+  /* @apply bg-[var(--primary-bg)]; */
+}
+
+.login-box {
+  /* @apply bg-[var(--card-bg)]; */
+  width: 95%;
+  margin: auto;
+}
+
+input, textarea {
+  background-color: var(--secondary-accent-tra);
+}
+
+input[type="text"] {
+  padding: 10px 10px;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  border-bottom: var(--primary-text) solid 2px;
+  background-color: var(--primary-bg-tra);
+  color: var(--primary-text);
+  text-align: center;
+}
+
+input::placeholder {
+  color: var(--secondary-accent);
+  text-align: center;
+}
+
+input:focus {
+  outline: none;
+}
+
+input[type="email"] {
+  padding: 10px 10px;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  border-bottom: var(--primary-text) solid 2px;
+  background-color: var(--primary-bg-tra);
+  color: var(--primary-text);
+  text-align: center;
+}
+
+input[type="password"] {
+  padding: 10px 10px;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  border-bottom: var(--primary-text) solid 2px;
+  background-color: var(--primary-bg-tra);
+  color: var(--primary-text);
+  text-align: center;
+}
+/* 🌟 Tarjetas translúcidas con efecto moderno */
+.card {
+  background: var(--card-bg-tra);
+  border-radius: 16px;
+  border: 0.2rem solid var(--secondary-accent);
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0px 2px 4px var(--card-bg);
+  transition: transform 0.3s ease-in-out;
+  height: fit-content;
+  border-bottom-left-radius: 0;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(90deg, var(--card-bg-tra), var(--card-bg));
+}
+
+.area-card {
+  background-color: var(--primary-bg);
+  height: 33vh;
+  color: var(--primary-text);
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: larger;
+  text-shadow: black 1px 1px 3px;
+}
+
+.img-card {
+  border-radius: 10px;
+  border-bottom-left-radius: 0;
+}
+/* 🖥️ Contenedor fluido */
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Filtros de contenido */
+
+.cinta-horizontal {
+  overflow-x: auto;
+  scroll-behavior: smooth; /* Desplazamiento suave */
+  scrollbar-width: none; /* Oculta la barra en Firefox */
+  -ms-overflow-style: none; /* Oculta la barra en Edge e IE */
+}
+
+/* Animaciones de los filtros de contenido*/
+@keyframes scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scroll-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* Ajustar duración si lo deseas:
+   30s => 1 botón cada 3s
+   20s => 1 botón cada 2s
+   10s => 1 botón cada 1s 
+   pero ahora solo se desplaza la mitad (50%), 
+   por lo que irá el doble de rápido. 
+   Si te parece demasiado veloz, duplícalo. 
+*/
+
+.animate-grados {
+  animation: scroll-left 30s linear infinite;
+}
+.animate-areas {
+  animation: scroll-right 20s linear infinite;
+}
+.animate-temas {
+  animation: scroll-left 10s linear infinite;
+}
+
+/* Detalles de contenido */
+
+/* Modal del popup */
+.modal {
+  padding-top: 1.7rem;
+}
+
+.modal-contenido {
+  background: var(--accent-color);
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-height: 80%;
+  box-shadow: 0px 5px 15px var(--secondary-accent);
+  color: var(--primary-text);
+  overflow-y: scroll;
+  z-index: 200;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--secondary-accent-tra);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-content {
+  background: var(--secondary-accent);
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-height: 80%;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  color: var(--primary-text);
+}
+
+select {
+  background-color: var(--secondary-accent);
+}
+
+/* Elementos markdown del ArticuloDetail */
+
+.articulo-contendedor {
+  background: var(--secondary-accent-tra);
+  border-radius: 10px;
+  height: 70vh;
+}
+
+.prose {
+  max-width: none;
+  font-family: "Oxanium", sans-serif;
+}
+
+.prose p {
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-size: large
+}
+
+.prose ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+}
+
+.prose ol {
+  list-style-type: decimal;
+  margin-left: 1.5rem;
+}
+
+.prose a {
+  color: var(--light-text);
+  text-decoration: underline;
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--primary-bg-tra);
+  padding-left: 1rem;
+  color: var(--secondary-text);
+  font-style: italic;
+}
+
+.prose code {
+  background-color: var(--secondary-accent-tra);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.prose pre {
+  background-color: var(--secondary-accent-tra);
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.prose table {
+  @apply w-full block overflow-x-auto whitespace-nowrap text-sm border border-gray-300;
+}
+
+.prose table th,
+.prose table td {
+  @apply border px-4 py-2 text-left align-top;
+}
+
+.prose table th {
+  background-color: var(--secondary-accent);
+}
+
+
+.dinamico-bg {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  filter: blur(2spx);
+  transition: background-color 0.5s ease-in-out;
+  opacity: 0.3;
+}
+
+/* Lightbox estilos */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.lightbox img {
+  transition: transform 0.3s ease-in-out;
+  max-height: 60vh;
+  max-width: 60vw;
+  vertical-align: middle;
+}
+
+.lightbox .close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: var(--secondary-accent);
+  color: var(--primary-text);
+  border: none;
+  border-radius: 50%;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.lightbox .close-button:hover {
+  background-color: var(--accent-color);
+}
+
+.lightbox .controls {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.lightbox .controls button {
+  background-color: var(--secondary-accent);
+  color: var(--light-text);
+  border: none;
+  border-radius: 50%;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.lightbox .controls button:hover {
+  background-color: var(--accent-color);
+}
