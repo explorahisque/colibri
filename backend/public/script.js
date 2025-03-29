@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     async function loadTableData(tableName) {
         try {
             const token = localStorage.getItem('token'); // Obtener el token del localStorage
-            const response = await fetch(`http://localhost:3000/api/${tableName}`, {
+            const response = await fetch(`https://colibriback.onrender.com//api/${tableName}`, {
                 headers: {
                     'Authorization': `Bearer ${token}` // Incluir el token en el encabezado
                 }
