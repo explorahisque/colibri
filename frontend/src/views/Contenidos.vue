@@ -15,7 +15,7 @@
       </div>
     </div>
     <!-- Contenido principal -->
-    <div class="flex-1 flex flex-col py-4 overflow-hidden pt-24  overflow-y-auto">
+    <div class="flex-1 flex flex-col py-4 overflow-hidden pt-24 overflow-y-auto">
       <!-- Buscador -->
       <div class="flex items-center justify-center mb-4">
           <input

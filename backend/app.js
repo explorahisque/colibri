@@ -479,6 +479,32 @@ app.delete('/api/usuarios/:id', verificarToken, verificarRol(['administrador']),
     }
 });
 
+/**
+ * Obtener un usuario por ID
+ */
+app.get('/api/usuarios/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Validar que el ID sea un número válido
+    if (isNaN(parseInt(id))) {
+      return res.status(400).json({ error: 'ID de usuario inválido' });
+    }
+
+    // Consultar el usuario en la base de datos
+    const result = await db.query('SELECT id, nombre, email, rol FROM usuarios WHERE id = $1', [id]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    // Devolver los datos del usuario
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error('Error al obtener el usuario:', error);
+    res.status(500).json({ error: 'Error al obtener el usuario' });
+  }
+});
+
 // ======================================
 // 🔹 NUEVOS ENDPOINTS: GESTIÓN DE BASE DE DATOS
 // ======================================

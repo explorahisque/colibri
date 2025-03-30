@@ -16,12 +16,14 @@
     </div>
 
     <!-- Contenido principal -->
-    <div class="flex-1 flex flex-col px-6 py-4 overflow-hidden">
+    <div class="flex-1 flex flex-col py-4 overflow-hidden pt-24 overflow-y-auto">
       <img src="@/assets/avatar.png" alt="Perfil" class="w-24 h-24 mx-auto rounded-full">
-      <h2 class="text-2xl font-bold text-gray-800 mt-4">Nombre del Estudiante</h2>
-      <div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 text-center">
+      <h2 class="text-2xl font-bold mt-4 self-center">{{ userName }}</h2>
+      <div class="max-w-lg mx-auto shadow-lg rounded-lg p-6 text-center">
         
-        <p class="text-gray-600">Aprendiz en progreso 🚀</p>
+        <h3>Aprendiz en crecimiento 🚀</h3>
+        <br>
+        <p>Próximamente podrás hacer seguimiento a todo tus logros de estudio</p>
 
         <!-- Progreso -->
         <div class="mt-6">
@@ -31,32 +33,7 @@
           </div>
         </div>
       </div>
-      <!-- Barra de búsqueda -->
-      <div class="flex items-center justify-center mb-4">
-        <input type="text" placeholder="Buscar" class="bg-pink-400 px-4 py-2 rounded-full outline-none text-white w-3/4 text-center" />
-        <button>
-          <search-icon class="w-6 h-6 text-pink-500" />
-        </button>
-      </div>
-
-      <!-- Categorías -->
-      <div class="flex justify-center flex-wrap text-sm overflow-hidden">
-        <div class="whitespace-nowrap">| Lorem ipsum || Lorem ipsum || Lorem ipsum |</div>
-      </div>
-      
-      <!-- Contenido con scroll -->
-      <div class="flex-1 overflow-y-auto mt-4">
-        <div class="grid grid-cols-3 gap-4 p-4">
-          <div v-for="item in 3" :key="item" class="bg-pink-400 p-4 rounded-lg">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh</p>
-            <p class="text-sm mt-2">Tema</p>
-            <p class="text-sm">Área</p>
-            <p class="font-bold mt-2">Grado Sexto</p>
-          </div>
-        </div>
-      </div>
     </div>
-
     <!-- Barra lateral derecha -->
     <div class="w-16 flex flex-col justify-center items-center space-y-6">
       <div class="space-y-4">
@@ -74,19 +51,57 @@
   </div>
 </template>
 
-<style scoped>
-  /* Evita el scroll general en la pantalla, pero permite scroll en el div de contenido */
-  html, body, #app {
-    height: 100%;
-    overflow: hidden;
-  }
-</style>
 <script>
+import { ref, onMounted } from 'vue';
 
 export default {
-  data() {
+  setup() {
+    const userName = ref('Cargando...');
+    const progreso = ref(45);
+
+    const getAuthenticatedUserId = async () => {
+      // Intenta obtener el ID del usuario desde el almacenamiento local
+      const userId = localStorage.getItem('userId');
+      if (!userId) {
+        console.error('No se encontró el ID del usuario en el almacenamiento local.');
+        return null;
+      }
+      return parseInt(userId, 10); // Convierte el ID a un número
+    };
+
+    const fetchUserData = async () => {
+      try {
+        const userId = await getAuthenticatedUserId();
+
+        if (!userId) {
+          userName.value = 'Usuario no autenticado';
+          return;
+        }
+
+        const response = await fetch(`https://colibriback.onrender.com/api/usuarios/${userId}`);
+        if (!response.ok) {
+          if (response.status === 404) {
+            console.warn('Usuario no encontrado en la API.');
+            userName.value = 'Usuario no encontrado';
+          } else {
+            throw new Error(`Error al obtener datos del usuario: ${response.status}`);
+          }
+          return;
+        }
+
+        const userData = await response.json();
+        userName.value = userData.nombre || 'Usuario'; // Asegúrate de usar "nombre" correctamente
+      } catch (error) {
+        console.error('Error al obtener el nombre del usuario:', error);
+        userName.value = 'Error al cargar usuario';
+      }
+    };
+
+    onMounted(fetchUserData);
+
     return {
-      progreso: 45, // Simulación de progreso
+      userName,
+      progreso,
     };
   },
 };
