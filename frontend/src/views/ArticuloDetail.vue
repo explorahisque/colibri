@@ -1,15 +1,19 @@
 <template>
   <div class="overflow-y-auto h-screen relative">
-    <div 
-      class="dinamico-bg absolute top-0 left-0 w-full h-full" 
+    <div
+      class="dinamico-bg absolute top-0 left-0 w-full h-full"
       :style="{ backgroundImage: primeraImagen ? `url(${primeraImagen})` : '' }"
     ></div>
-    <div class="w-5/6 py-4 overflow-hidden pt-24 overflow-y-auto justify-self-center relative z-10">
+    <div
+      class="w-5/6 py-4 overflow-hidden mt-[5rem] overflow-y-auto justify-self-center relative z-10 md:mt-[5rem]"
+    >
       <button @click="$router.back()" class="w-1/8 font-semibold mb-4">
         ← Volver
       </button>
       <div>
-        <div class="articulo-contenedor overflow-hidden overflow-y-auto" style="height: 70vh;">
+        <div
+          class="articulo-contenedor h-[80vh] overflow-hidden overflow-y-auto md:h-[70vh]"
+        >
           <h1 class="text-2xl font-bold text-center">{{ articulo.titulo }}</h1>
           <div class="mt-4">
             <h2 class="text-lg font-semibold">Grado:</h2>
@@ -24,29 +28,46 @@
             <div>{{ temaNombre || "Cargando..." }}</div>
           </div>
           <div v-if="articulo.contenido" class="mt-6">
-            <h2 class="text-xl font-semibold text-center">Contenido del artículo</h2>
-            <div v-html="renderizarContenido(articulo.contenido)" ref="contenidoRef" class="prose columns-1 md:columns-3 lg:columns-3 gap-4"></div>
+            <h2 class="text-xl font-semibold text-center">
+              Contenido del artículo
+            </h2>
+            <div
+              v-html="renderizarContenido(articulo.contenido)"
+              ref="contenidoRef"
+              class="prose columns-1 md:columns-3 lg:columns-3 gap-4"
+            ></div>
           </div>
         </div>
       </div>
-      <p v-if="loading" class="text-gray-600 mt-6 text-center">Cargando artículo...</p>
-      <div v-if="modalVisible" class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <p v-if="loading" class="text-gray-600 mt-6 text-center">
+        Cargando artículo...
+      </p>
+      <div
+        v-if="modalVisible"
+        class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+      >
         <div class="modal-contenido h-3/4 p-6 rounded-lg w-3/4 relative">
-          <button @click="cerrarModal" class="cerrar-modal absolute top-2 right-2 w-15 h-15">
-            <CerrarIcon class="w-6 h-6 text-white-500"/>
+          <button
+            @click="cerrarModal"
+            class="cerrar-modal absolute top-2 right-2 w-15 h-15"
+          >
+            <CerrarIcon class="w-6 h-6 text-white-500" />
           </button>
           <iframe :src="iframeSrc" class="w-full h-full border rounded"></iframe>
         </div>
       </div>
       <!-- Lightbox -->
-      <div v-if="lightboxVisible" class="lightbox fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+      <div
+        v-if="lightboxVisible"
+        class="lightbox fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
+      >
         <div class="relative">
-          <img 
-            :src="lightboxImageSrc" 
-            alt="Imagen ampliada" 
-            class="" 
+          <img
+            :src="lightboxImageSrc"
+            alt="Imagen ampliada"
+            class=""
             :style="{
-              transform: `scale(${lightboxZoom}) translate(${lightboxOffset.x}px, ${lightboxOffset.y}px)`
+              transform: `scale(${lightboxZoom}) translate(${lightboxOffset.x}px, ${lightboxOffset.y}px)`,
             }"
             @wheel="onLightboxWheel"
             @mousedown="onLightboxMouseDown"
@@ -54,16 +75,49 @@
             @touchmove="onLightboxTouchMove"
             @touchend="onLightboxTouchEnd"
           >
-          <button @click="cerrarLightbox" class="absolute top-4 right-4 bg-gray-800 text-white p-2 rounded-full">
-            <CerrarIcon class="w-6 h-6"/>
+          <button
+            @click="cerrarLightbox"
+            class="absolute top-4 right-4 bg-gray-800 text-white p-2 rounded-full"
+          >
+            <CerrarIcon class="w-6 h-6" />
           </button>
           <div class="absolute bottom-4 left-4 flex space-x-2">
-            <button @click="ajustarZoom(0.1)" class="bg-gray-800 text-white p-2 rounded">+</button>
-            <button @click="ajustarZoom(-0.1)" class="bg-gray-800 text-white p-2 rounded">-</button>
-            <button @click="moverImagen(-10, 0)" class="bg-gray-800 text-white p-2 rounded">←</button>
-            <button @click="moverImagen(10, 0)" class="bg-gray-800 text-white p-2 rounded">→</button>
-            <button @click="moverImagen(0, -10)" class="bg-gray-800 text-white p-2 rounded">↑</button>
-            <button @click="moverImagen(0, 10)" class="bg-gray-800 text-white p-2 rounded">↓</button>
+            <button
+              @click="ajustarZoom(0.1)"
+              class="bg-gray-800 text-white p-2 rounded"
+            >
+              +
+            </button>
+            <button
+              @click="ajustarZoom(-0.1)"
+              class="bg-gray-800 text-white p-2 rounded"
+            >
+              -
+            </button>
+            <button
+              @click="moverImagen(-10, 0)"
+              class="bg-gray-800 text-white p-2 rounded"
+            >
+              ←
+            </button>
+            <button
+              @click="moverImagen(10, 0)"
+              class="bg-gray-800 text-white p-2 rounded"
+            >
+              →
+            </button>
+            <button
+              @click="moverImagen(0, -10)"
+              class="bg-gray-800 text-white p-2 rounded"
+            >
+              ↑
+            </button>
+            <button
+              @click="moverImagen(0, 10)"
+              class="bg-gray-800 text-white p-2 rounded"
+            >
+              ↓
+            </button>
           </div>
         </div>
       </div>
@@ -75,7 +129,7 @@
 import { ref, onMounted, watch, nextTick } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
-import { marked } from 'marked'; // Importa marked
+import { marked } from "marked"; // Importa marked
 import CerrarIcon from "@/assets/cerrar.svg?component";
 
 marked.setOptions({
@@ -84,7 +138,7 @@ marked.setOptions({
 
 export default {
   components: {
-    CerrarIcon
+    CerrarIcon,
   },
   setup() {
     const route = useRoute();
@@ -98,18 +152,38 @@ export default {
     const contenidoRef = ref(null); // Ref para el contenedor del contenido
     const primeraImagen = ref(null);
 
+    // Lightbox
+    const lightboxVisible = ref(false);
+    const lightboxImageSrc = ref("");
+    const lightboxZoom = ref(1);
+    const lightboxOffset = ref({ x: 0, y: 0 });
+    const isDragging = ref(false);
+    const dragStart = ref({ x: 0, y: 0 });
+    const initialOffset = ref({ x: 0, y: 0 });
+    const isPinching = ref(false);
+    const pinchStartDistance = ref(0);
+    const initialZoom = ref(1);
+
     const fetcharticuloById = async (id) => {
       try {
-        const { data } = await axios.get(`https://colibriback.onrender.com/api/articulos/${id}`);
+        const { data } = await axios.get(
+          `https://colibriback.onrender.com/api/articulos/${id}`
+        );
         articulo.value = data;
 
         if (typeof articulo.value.contenido === "string") {
           // Check if the string looks like a JSON object
-          if (articulo.value.contenido.trim().startsWith('{') || articulo.value.contenido.trim().startsWith('[')) {
+          if (
+            articulo.value.contenido.trim().startsWith("{") ||
+            articulo.value.contenido.trim().startsWith("[")
+          ) {
             try {
               articulo.value.contenido = JSON.parse(articulo.value.contenido);
             } catch (e) {
-              console.warn("⚠️ No se pudo parsear articulo.contenido, se usará como string.", e);
+              console.warn(
+                "⚠️ No se pudo parsear articulo.contenido, se usará como string.",
+                e
+              );
             }
           }
         }
@@ -123,7 +197,9 @@ export default {
     const fetchTemaById = async (id) => {
       if (!id) return null;
       try {
-        const { data } = await axios.get(`https://colibriback.onrender.com/api/temas/${id}`);
+        const { data } = await axios.get(
+          `https://colibriback.onrender.com/api/temas/${id}`
+        );
         return data;
       } catch (error) {
         console.error("❌ Error al obtener el tema:", error);
@@ -134,7 +210,9 @@ export default {
     const fetchAreaById = async (id) => {
       if (!id) return null;
       try {
-        const { data } = await axios.get(`https://colibriback.onrender.com/api/areas/${id}`);
+        const { data } = await axios.get(
+          `https://colibriback.onrender.com/api/areas/${id}`
+        );
         return data;
       } catch (error) {
         console.error("❌ Error al obtener el área:", error);
@@ -145,7 +223,9 @@ export default {
     const fetchGradoById = async (id) => {
       if (!id) return null;
       try {
-        const { data } = await axios.get(`https://colibriback.onrender.com/api/grados/${id}`);
+        const { data } = await axios.get(
+          `https://colibriback.onrender.com/api/grados/${id}`
+        );
         return data;
       } catch (error) {
         console.error("❌ Error al obtener el grado:", error);
@@ -156,13 +236,16 @@ export default {
     const abrirModal = (link) => {
       try {
         const url = new URL(link);
-        
+
         if (url.hostname.includes("spotify.com")) {
           window.open(link, "_blank");
           return;
         }
-        
-        if (url.hostname === "youtube.com" || url.hostname === "www.youtube.com") {
+
+        if (
+          url.hostname === "youtube.com" ||
+          url.hostname === "www.youtube.com"
+        ) {
           const videoId = url.searchParams.get("v");
           iframeSrc.value = `https://www.youtube.com/embed/${videoId}`;
         } else if (url.hostname === "youtu.be") {
@@ -171,7 +254,7 @@ export default {
         } else if (url.hostname.includes("scielo.org")) {
           window.open(link, "_blank");
           return;
-        }  else if (url.hostname.includes("researchgate.net")) {
+        } else if (url.hostname.includes("researchgate.net")) {
           window.open(link, "_blank");
           return;
         } else {
@@ -191,33 +274,36 @@ export default {
     };
 
     const renderizarContenido = (contenido) => {
-      if (!contenido) return '<p>Contenido no disponible</p>';
-      
-      if (contenido.trim().startsWith('<')) {
+      if (!contenido) return "<p>Contenido no disponible</p>";
+
+      if (contenido.trim().startsWith("<")) {
         return contenido;
       }
-      
-      let contenidoLimpio = contenido.replace(/\\n/g, '\n');
+
+      let contenidoLimpio = contenido.replace(/\\n/g, "\n");
       const campoRegex = /^".+?":\s*"(.*)"$/s;
       const match = contenidoLimpio.match(campoRegex);
       if (match) {
         contenidoLimpio = match[1];
       }
-      
+
       let htmlContent = marked(contenidoLimpio);
-      const temp = document.createElement('div');
+      const temp = document.createElement("div");
       temp.innerHTML = htmlContent;
-      
+
       // Agrupar nodos en tarjetas a partir de cada título
-      const container = document.createElement('div');
+      const container = document.createElement("div");
       let currentCard = null;
-      Array.from(temp.childNodes).forEach(node => {
-        if (node.nodeType === Node.ELEMENT_NODE && /^H[1-2]$/.test(node.tagName)) {
+      Array.from(temp.childNodes).forEach((node) => {
+        if (
+          node.nodeType === Node.ELEMENT_NODE &&
+          /^H[1-2]$/.test(node.tagName)
+        ) {
           if (currentCard) {
             container.appendChild(currentCard);
           }
-          currentCard = document.createElement('div');
-          currentCard.classList.add('card', 'mb-4', 'break-inside-avoid');
+          currentCard = document.createElement("div");
+          currentCard.classList.add("card", "mb-4", "break-inside-avoid");
           currentCard.appendChild(node.cloneNode(true));
         } else {
           if (currentCard) {
@@ -230,22 +316,25 @@ export default {
       if (currentCard) {
         container.appendChild(currentCard);
       }
-      
+
       // Restaurar funcionalidad de modal en enlaces externos y agregar target="_blank"
-      container.querySelectorAll('a').forEach(a => {
-        const href = a.getAttribute('href');
-        if (href && !href.startsWith('#')) {
-          a.setAttribute('target', '_blank');
-          a.setAttribute('onclick', 'event.preventDefault(); window.abrirModalArticulo(this.href)');
+      container.querySelectorAll("a").forEach((a) => {
+        const href = a.getAttribute("href");
+        if (href && !href.startsWith("#")) {
+          a.setAttribute("target", "_blank");
+          a.setAttribute(
+            "onclick",
+            "event.preventDefault(); window.abrirModalArticulo(this.href)"
+          );
         }
       });
 
       // Agrega funcionalidad de lightbox a las imágenes
-      container.querySelectorAll('img').forEach(img => {
-        img.classList.add('cursor-pointer');
+      container.querySelectorAll("img").forEach((img) => {
+        img.classList.add("cursor-pointer");
         img.onclick = () => abrirLightbox(img.src); // Cambiar a `onclick` para asegurar el registro del evento
       });
-      
+
       return container.innerHTML;
     };
 
@@ -258,19 +347,6 @@ export default {
         }
       }
     };
-
-    const lightboxVisible = ref(false);
-    const lightboxImageSrc = ref("");
-    const lightboxZoom = ref(1);
-    const lightboxOffset = ref({ x: 0, y: 0 });
-
-    // Nuevos refs para interacciones
-    const isDragging = ref(false);
-    const dragStart = ref({ x: 0, y: 0 });
-    const initialOffset = ref({ x: 0, y: 0 });
-    const isPinching = ref(false);
-    const pinchStartDistance = ref(0);
-    const initialZoom = ref(1);
 
     // Funciones para arrastrar con mouse
     const onLightboxWheel = (e) => {
@@ -418,6 +494,34 @@ export default {
       abrirModal(href);
     };
 
+    // **Corrected Hash Handling**
+    const scrollToHeadingByText = (hashText) => {
+      if (!hashText) return;
+      nextTick(() => {
+        // Buscar el elemento cuyo texto contenga ese hash
+        const headings = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+        for (const heading of headings) {
+          if (
+            heading.textContent
+              .trim()
+              .toLowerCase()
+              .includes(hashText.toLowerCase())
+          ) {
+            heading.scrollIntoView({ behavior: "smooth" });
+            break; // Stop after finding the first match
+          }
+        }
+      });
+    };
+
+    watch(
+      () => route.hash,
+      (newHash) => {
+        const hashText = decodeURIComponent(newHash.substring(1));
+        scrollToHeadingByText(hashText);
+      }
+    );
+
     onMounted(async () => {
       const articuloId = route.params.id;
       await fetcharticuloById(articuloId);
@@ -426,29 +530,26 @@ export default {
         const tema = await fetchTemaById(articulo.value.tema_id);
         temaNombre.value = tema?.nombre || "Sin Tema";
 
-        const area = await fetchAreaById(tema?.area_id || articulo.value.area_id);
+        const area = await fetchAreaById(
+          tema?.area_id || articulo.value.area_id
+        );
         areaNombre.value = area?.nombre || "Sin Área";
 
-        const grado = await fetchGradoById(area?.grado_id || articulo.value.grado_id);
+        const grado = await fetchGradoById(
+          area?.grado_id || articulo.value.grado_id
+        );
         gradoNombre.value = grado?.nombre || "Desconocido";
       } catch (error) {
-        console.error("❌ Error al obtener nombres de grado, área y tema:", error);
+        console.error(
+          "❌ Error al obtener nombres de grado, área y tema:",
+          error
+        );
       }
 
+      // Initial scroll on mount
       if (route.hash) {
-        nextTick(() => {
-          // Quitar el "#" del hash
-          const hashText = decodeURIComponent(route.hash.substring(1)).toLowerCase()
-          
-          // Buscar el elemento cuyo texto contenga ese hash
-          const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6')
-          for (const heading of headings) {
-            if (heading.textContent.trim().toLowerCase().includes(hashText)) {
-              heading.scrollIntoView({ behavior: 'smooth' })
-              break
-            }
-          }
-        })
+        const hashText = decodeURIComponent(route.hash.substring(1));
+        scrollToHeadingByText(hashText);
       }
 
       nextTick(() => {
