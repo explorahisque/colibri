@@ -650,3 +650,14 @@ select {
 .lightbox .controls button:hover {
   background-color: var(--accent-color);
 }
+
+/* Estilos para elementos de sonido */
+.sound-enabled {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.sound-disabled {
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}

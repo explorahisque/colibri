@@ -40,8 +40,10 @@ import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { login, checkEmail, createUser } from '@/services/authService';
 import { useAuth } from '@/composables/useAuth'; // Importar el estado de autenticación
+import { soundMixin } from '@/plugins/sound';
 
 export default {
+  mixins: [soundMixin],
   setup() {
     const step = ref(1);
     const inputValue = ref('');
@@ -54,8 +56,12 @@ export default {
     const route = useRoute();
     const { checkAuth } = useAuth(); // Obtener la función para verificar autenticación
 
+    // Extract sound methods from mixin
+    const { playUISound, playAlertSound, playCelebrationSound } = soundMixin.methods;
+
     const nextStep = async () => {
       try {
+        playUISound('ui.tap');
         console.log("Paso actual:", step.value);
 
         if (step.value === 1) {
@@ -78,10 +84,12 @@ export default {
             // Intentar iniciar sesión
             try {
               await login(email.value, password.value);
+              playCelebrationSound('simple');
               await checkAuth(); // Actualizar el estado de autenticación global
               const redirectPath = route.query.redirect || '/';
               window.location.href = redirectPath; // Redirigir al contenido
             } catch (error) {
+              playAlertSound('error');
               alert('Credenciales incorrectas');
               inputValue.value = '';
             }
@@ -114,11 +122,20 @@ export default {
           }
         }
       } catch (error) {
+        playAlertSound('error');
         alert(error.message);
       }
     };
 
-    return { step, inputValue, nextStep, emailExists };
+    return { 
+      step, 
+      inputValue, 
+      nextStep, 
+      emailExists,
+      playUISound,
+      playAlertSound,
+      playCelebrationSound 
+    };
   }
 };
 </script>

@@ -175,9 +175,13 @@
 import { ref, computed, onMounted, onBeforeUnmount, watch, nextTick } from "vue";
 import '@toast-ui/editor/dist/toastui-editor.css';
 import Editor from '@toast-ui/editor';
+import { soundMixin } from '@/plugins/sound';
 
 export default {
+  mixins: [soundMixin],
   setup() {
+    const { playUISound, playAlertSound } = soundMixin.methods;
+
     const searchQuery = ref("");
     const articulos = ref([]);
     const gradoNames = ref([]);
@@ -267,9 +271,11 @@ export default {
           }
         });
         if (!response.ok) throw new Error("No se pudo eliminar el articulo");
+        playAlertSound('success');
         alert("Artículo eliminado con éxito");
         fetchAllData();
       } catch (error) {
+        playAlertSound('error');
         console.error("Error al eliminar el articulo", error);
         alert("No se pudo eliminar el articulo");
       }
@@ -400,6 +406,7 @@ export default {
     };
 
     const editararticulo = (articulo) => {
+      playUISound('ui.unlock');
       articuloEditando.value = {
         id: articulo.id,
         nombre: articulo.nombre,
@@ -415,6 +422,7 @@ export default {
     };
 
     const nuevoarticulo = () => {
+      playUISound('ui.tap');
       articuloEditando.value = {
         id: null,
         nombre: "",
@@ -462,11 +470,13 @@ export default {
           });
           
           if (!response.ok) throw new Error("Error al guardar el articulo");
+          playAlertSound('success');
           alert("Artículo guardado con éxito");
           mostrarModal.value = false;
           fetchAllData();
         }, 200);
       } catch (error) {
+        playAlertSound('error');
         console.error("Error al guardar el articulo", error);
         alert("Hubo un error al guardar el articulo");
       }
@@ -521,7 +531,9 @@ export default {
       temaMap,
       editarGrado,
       editarArea,
-      editarTema
+      editarTema,
+      playUISound,
+      playAlertSound
     };
   }
 };

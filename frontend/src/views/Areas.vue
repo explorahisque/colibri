@@ -11,7 +11,10 @@
     </header>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div v-for="area in filteredAreas" :key="area.id" class="bg-white shadow-md rounded-lg p-4 cursor-pointer hover:shadow-lg transition">
+      <div v-for="area in filteredAreas" 
+           :key="area.id" 
+           @mouseenter="playUISound('navigation.hover', 0.2)"
+           class="bg-white shadow-md rounded-lg p-4 cursor-pointer hover:shadow-lg transition">
         <router-link :to="`/area/${area.id}`" class="text-xl font-semibold text-blue-600 hover:underline">
           {{ area.nombre }}
         </router-link>
@@ -22,7 +25,10 @@
 
 <script>
 import { ref, computed, onMounted } from "vue";
+import { soundMixin } from '@/plugins/sound';
+
 export default {
+  mixins: [soundMixin],
   setup() {
     const searchQuery = ref("");
     const areas = ref([]);

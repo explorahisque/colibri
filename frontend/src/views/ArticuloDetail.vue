@@ -131,16 +131,21 @@ import { useRoute } from "vue-router";
 import axios from "axios";
 import { marked } from "marked"; // Importa marked
 import CerrarIcon from "@/assets/cerrar.svg?component";
+import { soundMixin } from '@/plugins/sound';
 
 marked.setOptions({
   breaks: true, // Enable line breaks
 });
 
 export default {
+  mixins: [soundMixin],
   components: {
     CerrarIcon,
   },
   setup() {
+    // Extract sound methods from mixin at the start of setup
+    const { playUISound, playAlertSound } = soundMixin.methods;
+    
     const route = useRoute();
     const articulo = ref({});
     const temaNombre = ref(null);
@@ -234,6 +239,7 @@ export default {
     };
 
     const abrirModal = (link) => {
+      playUISound('ui.unlock');
       try {
         const url = new URL(link);
 
@@ -262,6 +268,7 @@ export default {
         }
         modalVisible.value = true;
       } catch (error) {
+        playAlertSound('error');
         console.error("Error al procesar la URL:", error);
         iframeSrc.value = link;
         modalVisible.value = true;
@@ -269,6 +276,7 @@ export default {
     };
 
     const cerrarModal = () => {
+      playUISound('ui.lock');
       modalVisible.value = false;
       iframeSrc.value = "";
     };
@@ -458,6 +466,7 @@ export default {
     });
 
     const abrirLightbox = (src) => {
+      playUISound('ui.unlock');
       lightboxImageSrc.value = src;
       lightboxVisible.value = true;
       lightboxZoom.value = 1;
@@ -465,6 +474,7 @@ export default {
     };
 
     const cerrarLightbox = () => {
+      playUISound('ui.lock');
       lightboxVisible.value = false;
       lightboxImageSrc.value = "";
     };
@@ -584,6 +594,8 @@ export default {
       onLightboxTouchStart,
       onLightboxTouchMove,
       onLightboxTouchEnd,
+      playUISound,
+      playAlertSound
     };
   },
 };

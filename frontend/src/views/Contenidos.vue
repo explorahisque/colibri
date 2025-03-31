@@ -147,8 +147,8 @@
 
         <!-- Tarjetas de articulos -->
         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div v-for="articulo in filteredarticulos" :key="articulo.id" class="card">
-            <router-link :to="`/articulo/${articulo.id}`" class="h2">
+          <div v-for="articulo in filteredarticulos" :key="articulo.id" class="card" @mouseenter="handleCardHover">
+            <router-link :to="`/articulo/${articulo.id}`" class="h2" @click="handleCardClick">
               {{ articulo.nombre }}
             </router-link>
             <p class="text-sm">
@@ -182,6 +182,7 @@
 
 <script>
 import { ref, computed, onMounted, watch, nextTick } from "vue";
+import { playSound, hasInteracted } from "@/services/soundService";
 
 export default {
   components: {
@@ -304,14 +305,41 @@ export default {
 
     onMounted(fetchAllData);
 
-    const toggleFilter = (type, name) => {
-      activeFilters.value[type] = activeFilters.value[type] === name ? null : name;
+    const toggleFilter = async (type, name) => {
+      const oldValue = activeFilters.value[type];
+      activeFilters.value[type] = oldValue === name ? null : name;
+      
+      if (hasInteracted.value) {
+        try {
+          await playSound(oldValue === name ? 'filter.off' : 'filter.on', 0.3);
+        } catch (error) {
+          console.error('Error al reproducir sonido:', error);
+        }
+      }
+      
       if (type === "grados") {
         activeFilters.value.areas = null;
         activeFilters.value.temas = null;
       }
       if (type === "areas") {
         activeFilters.value.temas = null;
+      }
+    };
+
+    const handleCardHover = async () => {
+      if (!hasInteracted.value) return;
+      try {
+        await playSound('navigation.hover', 0.3);
+      } catch (error) {
+        console.error('Error al reproducir sonido:', error);
+      }
+    };
+
+    const handleCardClick = async () => {
+      try {
+        await playSound('navigation.forward');
+      } catch (error) {
+        console.error('Error al reproducir sonido:', error);
       }
     };
 
@@ -470,7 +498,9 @@ export default {
       duplicararticulo,
       gradoMap,
       areaMap,
-      temaMap
+      temaMap,
+      handleCardHover,
+      handleCardClick
     };
   }
 };
@@ -491,4 +521,3 @@ export default {
   @apply px-4 py-2 rounded-lg bg-black transition-colors;
 }
 </style>
-

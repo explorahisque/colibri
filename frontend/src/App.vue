@@ -1,5 +1,5 @@
 <template>
-  <div class="cuerpo">
+  <div class="cuerpo" @click="handleFirstInteraction">
     <Header />
     <router-view />
   </div>
@@ -7,8 +7,14 @@
 
 <script>
 import Header from "@/components/Header.vue";
+import { enableSounds } from "@/services/soundService";
 
 export default {
-  components: { Header }
+  components: { Header },
+  methods: {
+    handleFirstInteraction() {
+      enableSounds();
+    }
+  }
 };
 </script>

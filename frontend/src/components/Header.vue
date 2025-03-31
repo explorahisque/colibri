@@ -11,27 +11,27 @@
         </router-link>
 
         <div class="space-x-4 flex items-center">
-          <button v-if="usuario" @click="$router.push('/contenidos')" class="boton-icono" aria-label="Contenidos">
+          <button v-if="usuario" @click="handleNavigation('/contenidos')" class="boton-icono" aria-label="Contenidos">
             <book-icon class="w-11 h-11 text-white-500" />
             <span class="tooltip">Contenidos</span>
           </button>
 
-          <button v-if="usuario" @click="$router.push('/perfil')" class="boton-icono" aria-label="Perfil de usuario">
+          <button v-if="usuario" @click="handleNavigation('/perfil')" class="boton-icono" aria-label="Perfil de usuario">
             <user-icon class="w-11 h-11 text-white-500" />
             <span class="tooltip">Perfil</span>
           </button>
 
-          <button v-if="esAdmin" @click="$router.push('/administrar')" class="boton-icono" aria-label="Administrar contenidos">
+          <button v-if="esAdmin" @click="handleNavigation('/administrar')" class="boton-icono" aria-label="Administrar contenidos">
             <list-icon class="w-11 h-11 text-white-500" />
             <span class="tooltip">Administrar</span>
           </button>
 
-          <button v-if="!usuario" @click="$router.push('/iniciar')" class="boton-icono" aria-label="Iniciar sesión">
+          <button v-if="!usuario" @click="handleNavigation('/iniciar')" class="boton-icono" aria-label="Iniciar sesión">
             <login-icon class="w-11 h-11 text-white-500" />
             <span class="tooltip">Iniciar sesión</span>
           </button>
 
-          <button v-if="usuario" @click="logout" class="boton-icono" aria-label="Salir">
+          <button v-if="usuario" @click="handleLogout" class="boton-icono" aria-label="Salir">
             <logout-icon class="w-11 h-11 text-white-500" />
             <span class="tooltip">Salir</span>
           </button>
@@ -39,6 +39,11 @@
           <button @click="togglePaletasDropdown" class="boton-icono" aria-label="Selector de colores">
             <colors-icon class="w-11 h-11 text-white-500" />
             <span class="tooltip">Colores</span>
+          </button>
+
+          <button @click="toggleSound" class="boton-icono" aria-label="Sonido">
+            <sound-icon :class="{ 'opacity-50': !soundEnabled }" class="w-11 h-11 text-white-500" />
+            <span class="tooltip">{{ soundEnabled ? 'Silenciar' : 'Activar sonido' }}</span>
           </button>
 
           <div v-if="showDropdown" class="palettes-dropdown">
@@ -72,31 +77,31 @@
         <div v-if="showMenu" class="absolute top-16 right-4 shadow-md rounded-md z-50">
           <ul class="py-2">
             <li v-if="usuario">
-              <button @click="$router.push('/contenidos'); showMenu = false" class="block w-full text-left px-4 py-2 ">
+              <button @click="handleNavigation('/contenidos'); showMenu = false" class="block w-full text-left px-4 py-2 ">
                 <book-icon class="w-11 h-11 inline-block mr-2 text-white-500" />
                 Contenidos
               </button>
             </li>
             <li v-if="usuario">
-              <button @click="$router.push('/perfil'); showMenu = false" class="block w-full text-left px-4 py-2 ">
+              <button @click="handleNavigation('/perfil'); showMenu = false" class="block w-full text-left px-4 py-2 ">
                 <user-icon class="w-11 h-11 inline-block mr-2 text-white-500" />
                 Perfil
               </button>
             </li>
             <li v-if="esAdmin">
-              <button @click="$router.push('/administrar'); showMenu = false" class="block w-full text-left px-4 py-2 ">
+              <button @click="handleNavigation('/administrar'); showMenu = false" class="block w-full text-left px-4 py-2 ">
                 <list-icon class="w-11 h-11 inline-block mr-2 text-white-500" />
                 Administrar
               </button>
             </li>
             <li v-if="!usuario">
-              <button @click="$router.push('/iniciar'); showMenu = false" class="block w-full text-left px-4 py-2 ">
+              <button @click="handleNavigation('/iniciar'); showMenu = false" class="block w-full text-left px-4 py-2 ">
                 <login-icon class="w-11 h-11 inline-block mr-2 text-white-500" />
                 Iniciar sesión
               </button>
             </li>
             <li v-if="usuario">
-              <button @click="() => { logout(); showMenu = false }" class="block w-full text-left px-4 py-2 ">
+              <button @click="() => { handleLogout(); showMenu = false }" class="block w-full text-left px-4 py-2 ">
                 <logout-icon class="w-11 h-11 inline-block mr-2 text-white-500" />
                 Salir
               </button>
@@ -110,7 +115,10 @@
 
 <script>
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router"; // Importar el enrutador
 import { obtenerUsuario, logout } from "@/services/authService";
+import { soundEnabled, playSound } from "@/services/soundService";
+import SoundIcon from "@/assets/sound.svg?component";
 // ... (Importaciones de iconos)
 import SearchIcon from "@/assets/search.svg?component"; // Agrega `?component`
 import NewIcon from "@/assets/new.svg?component";
@@ -139,9 +147,10 @@ import ColorsIcon from "@/assets/colors.svg?component";
 import CerrarIcon from "@/assets/cerrar.svg?component";
 
 export default {
-  components: { SearchIcon, NewIcon, EditIcon, DeleteIcon, ImportIcon, ExportIcon, UpIcon, DownIcon, PrintIcon, RightIcon, LeftIcon, BookIcon, ListIcon, UserIcon, UserBookIcon, UserCreateIcon, UserEditIcon, UserDeleteIcon, LoginIcon, LogoutIcon, PlayIcon, PauseIcon, StopIcon, ColorsIcon, CerrarIcon },
+  components: { SearchIcon, NewIcon, EditIcon, DeleteIcon, ImportIcon, ExportIcon, UpIcon, DownIcon, PrintIcon, RightIcon, LeftIcon, BookIcon, ListIcon, UserIcon, UserBookIcon, UserCreateIcon, UserEditIcon, UserDeleteIcon, LoginIcon, LogoutIcon, PlayIcon, PauseIcon, StopIcon, ColorsIcon, CerrarIcon, SoundIcon },
   
   setup() {
+    const router = useRouter(); // Usar el enrutador
     const usuario = ref(null);
     const esAdmin = ref(false);
     const showMenu = ref(false);
@@ -155,7 +164,34 @@ export default {
       showMenu.value = !showMenu.value;
     };
 
-    return { usuario, esAdmin, logout, showMenu, toggleMenu };
+    const toggleSound = () => {
+      soundEnabled.value = !soundEnabled.value;
+      if (soundEnabled.value) {
+        playSound('state.confirm.up');
+      }
+    };
+
+    const handleNavigation = async (route) => {
+      try {
+        await playSound('navigation.forward');
+        router.push(route); // Navegar después de reproducir el sonido
+      } catch (error) {
+        console.error("Error durante la navegación:", error);
+        router.push(route); // Asegurar la navegación incluso si hay un error
+      }
+    };
+
+    const handleLogout = async () => {
+      try {
+        await playSound('state.confirm.down');
+      } catch (error) {
+        console.error("Error reproduciendo sonido:", error);
+      } finally {
+        await logout();
+      }
+    };
+
+    return { usuario, esAdmin, logout, showMenu, toggleMenu, soundEnabled, toggleSound, handleNavigation, handleLogout };
   },
   data() {
     return {
@@ -185,6 +221,12 @@ export default {
       // Oculta el menú
       this.showDropdown = false;
     }
+  },
+  mounted() {
+    const buttons = document.querySelectorAll('.boton-icono');
+    buttons.forEach(button => {
+      button.addEventListener('mouseenter', () => playSound('navigation.hover'));
+    });
   }
 };
 </script>

@@ -46,6 +46,7 @@
                 :key="grado.id" 
                 :to="`/grados/${grado.id}`" 
                 class="inline-block p-4 text-center transition card mx-2"
+                @mouseenter="handleCardHover"
               >
                 {{ grado.nombre }}
               </router-link>
@@ -58,6 +59,7 @@
             :key="area.id" 
             :to="`/areas/${area.id}`" 
             class="p-4 text-center transition card area-card relative content-center"
+            @mouseenter="handleCardHover"
           >
             <div 
               class="img-card absolute inset-0 bg-cover bg-center opacity-50" 
@@ -74,11 +76,13 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useAuth } from '@/composables/useAuth';
+import { soundMixin } from '@/plugins/sound';
 
 const contenidos = ref([]);
 const gradoNames = ref([]);
 const areaNames = ref([]);
 const { authState, checkAuth } = useAuth(); // Usa authState directamente
+const { playUISound } = soundMixin.methods;
 
 // Función para obtener los grados desde la API
 const fetchGrados = async () => {
@@ -126,6 +130,11 @@ const startSlideshow = () => {
   setInterval(() => {
     currentImageIndex.value = (currentImageIndex.value + 1) % slideshowImages.value.length;
   }, 5000);
+};
+
+// Add hover sound to cards
+const handleCardHover = () => {
+  playUISound('ui.tap', 0.2);
 };
 
 // Verificar el estado de autenticación y cargar los grados y áreas al montar el componente

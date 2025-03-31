@@ -17,6 +17,29 @@ El frontend implementa un sofisticado sistema de temas con variables CSS persona
 - Cada tema define 15+ variables para colores y efectos visuales
 - Transiciones suaves entre temas mediante `transition: all 0.3s ease-in-out`
 
+### Sistema de Sonido
+El frontend implementa un sistema de sonido basado en Material Design:
+
+1. **Jerarquía de Sonidos:**
+   - Brand sounds (nivel 1): Mnemonics
+   - Hero sounds (nivel 2): Momentos de celebración
+   - Alertas y notificaciones (nivel 3)
+   - Sonidos UX primarios (nivel 4)
+   - Sonidos UX secundarios (nivel 5)
+
+2. **Tipos de Sonido:**
+   - Feedback interactivo
+   - Sonidos decorativos
+   - Sonidos ambientales
+   - Notificaciones y alertas
+   - Sonidos de sistema
+
+3. **Formatos y Optimización:**
+   - Formatos: MP3/OGG para optimización
+   - Equilibrio entre calidad y tamaño
+   - Control de volumen logarítmico
+   - Ecualización adaptativa
+
 ## Componentes y Vistas Principales
 
 ### Estructura de Navegación
@@ -42,7 +65,7 @@ El frontend implementa un sofisticado sistema de temas con variables CSS persona
 ```javascript
 router.beforeEach((to, from, next) => {
   const usuario = obtenerUsuario();
-  if (!usuario && to.path !== "/iniciar") {
+  if (!usuario y to.path !== "/iniciar") {
     next("/iniciar");
   } else {
     next();
@@ -159,3 +182,113 @@ Ver `CONTRIBUTING.md` para guías detalladas sobre:
 - Estándares de código
 - Proceso de revisión
 - Reporte de bugs
+
+## Sistema de Sonido
+
+### Arquitectura de Sonido
+El sistema de sonido está diseñado siguiendo los principios de Material Design Sound, implementado en tres capas:
+
+1. **Service Layer (`soundService.js`)**
+   - Gestión de audio con cacheo y optimización
+   - Control de volumen por tipo de sonido
+   - Soporte para múltiples formatos (OGG/WAV)
+
+2. **Plugin Layer (`plugins/sound.js`)**
+   - Integración con Vue Router
+   - Mixins para componentes
+   - Gestión de navegación sonora
+
+3. **Component Layer**
+   - Integración mediante mixins
+   - Eventos de interacción sonora
+   - Feedback táctil y auditivo
+
+### Tipos de Sonido Disponibles
+
+```javascript
+// Navegación
+'navigation.hover'      // Hover sobre elementos navegables
+'navigation.forward'    // Navegación hacia adelante
+'navigation.back'       // Navegación hacia atrás
+'navigation.error'     // Error en navegación
+'navigation.complete'   // Completado de navegación
+
+// Interacción UI
+'ui.tap'               // Tap general
+'ui.toggle'            // Toggle de estados
+'ui.click'            // Click en elementos
+'ui.lock'             // Bloqueo de elementos
+'ui.unlock'           // Desbloqueo de elementos
+
+// Alertas
+'alert.error'          // Error crítico
+'alert.warning'        // Advertencia
+'alert.success'        // Éxito
+
+// Estados
+'state.confirm.up'     // Confirmación positiva
+'state.confirm.down'   // Confirmación negativa
+
+// Transiciones
+'transition.left'      // Transición hacia la izquierda
+'transition.right'     // Transición hacia la derecha
+
+// Celebraciones
+'celebration.simple'    // Celebración simple
+'celebration.decorative' // Celebración decorativa
+```
+
+### Uso en Componentes
+
+1. **Usando el Mixin de Sonido**
+```javascript
+import { soundMixin } from '@/plugins/sound';
+
+export default {
+  mixins: [soundMixin],
+  methods: {
+    handleClick() {
+      this.playUISound('ui.tap');
+    },
+    handleSuccess() {
+      this.playAlertSound('success');
+    },
+    handleAchievement() {
+      this.playCelebrationSound('decorative');
+    }
+  }
+}
+```
+
+2. **Usando el Servicio Directamente**
+```javascript
+import { playSound } from '@/services/soundService';
+
+// En cualquier método:
+await playSound('navigation.forward', 0.4);
+```
+
+### Volúmenes Optimizados
+Los niveles de volumen están preconfigurados por tipo de sonido:
+```javascript
+navigation.hover: 0.2    // Sutil
+ui.tap: 0.3             // Moderado
+alert.error: 0.6        // Notable
+celebration.simple: 0.5  // Medio
+```
+
+### Consideraciones de Uso
+
+1. **Activación**
+   - Los sonidos se activan con la primera interacción del usuario
+   - Se puede desactivar/activar mediante `soundEnabled.value`
+
+2. **Rendimiento**
+   - Los sonidos se cachean automáticamente
+   - Soporte progresivo (OGG → WAV)
+   - Gestión automática de memoria
+
+3. **Accesibilidad**
+   - Volúmenes optimizados por contexto
+   - Feedback consistente
+   - Desactivación global disponible
