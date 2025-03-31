@@ -1,44 +1,55 @@
-import { ref } from 'vue'
-import axios from 'axios'
+import { reactive } from 'vue';
+import axios from 'axios';
+
+const authState = reactive({
+  user: {}, // Inicializa como un objeto vacío para evitar errores de acceso
+  isAuthenticated: false,
+  isAdmin: false,
+});
+
+export async function checkAuth() {
+  const token = localStorage.getItem('token');
+  const usuarioGuardado = JSON.parse(localStorage.getItem('usuario') || '{}');
+
+  if (!token) {
+    authState.user = null;
+    authState.isAuthenticated = false;
+    authState.isAdmin = false;
+    return false;
+  }
+
+  try {
+    const response = await fetch('https://colibriback.onrender.com/api/auth/perfil', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error al obtener el perfil: ${response.statusText}`);
+    }
+
+    const perfilResponse = await response.json();
+    const perfilCompleto = {
+      ...perfilResponse,
+      ...usuarioGuardado,
+      id: perfilResponse.id
+    };
+    
+    authState.user = perfilCompleto;
+    authState.isAuthenticated = true;
+    authState.isAdmin = perfilCompleto.rol === 'administrador';
+    
+    return true;
+  } catch (error) {
+    console.error("Error en checkAuth:", error);
+    authState.user = null;
+    authState.isAuthenticated = false;
+    authState.isAdmin = false;
+    return false;
+  }
+}
 
 export function useAuth() {
-  const isAdmin = ref(false)
-  const isAuthenticated = ref(false) // Estado de autenticación
-  const user = ref(null)
-
-  const checkAuth = async () => {
-    try {
-      const token = localStorage.getItem('token')
-      if (!token) {
-        console.log('No token found')
-        return false
-      }
-
-      // Configurar el token en los headers
-      const config = {
-        headers: { Authorization: `Bearer ${token}` }
-      }
-
-      // Se cambia la URL a /api/auth/perfil
-      const response = await axios.get('https://colibriback.onrender.com/api/auth/perfil', config)
-      console.log('Perfil response:', response.data)
-      
-      user.value = response.data
-      isAdmin.value = response.data.rol === 'administrador'
-      isAuthenticated.value = true
-      
-      return true
-    } catch (error) {
-      console.error('Error de autenticación:', error.response?.data || error.message)
-      localStorage.removeItem('token')
-      return false
-    }
-  }
-
-  return {
-    isAdmin,
-    isAuthenticated, // Exportar el estado de autenticación
-    user,
-    checkAuth
-  }
+  return { authState, checkAuth }; // Devuelve el objeto completo
 }

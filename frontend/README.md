@@ -1,144 +1,161 @@
 # Documentación del Frontend
 
 ## Introducción
-Este proyecto constituye la interfaz de usuario de la aplicación Co-Libri Learning y se implementa utilizando Vite, Vue 3 y Tailwind CSS, ofreciendo una experiencia moderna, responsiva y minimalista.
+Este proyecto constituye la interfaz de usuario de la aplicación Co-Libri Learning, implementado con Vite, Vue 3 y Tailwind CSS, ofreciendo una experiencia moderna, responsiva y minimalista.
 
 ## Arquitectura e Implementación
-- **Vite + Vue 3:** Se utiliza una Single Page Application (SPA) iniciada en `index.html` con el script principal en `src/main.js`.
-- **Tailwind CSS y PostCSS:** Se configuran en `tailwind.config.js` y `postcss.config.js` para lograr un diseño ágil y optimizado.
-- **Gestión de Dependencias:** El manejo de módulos se realiza mediante npm, como se ve en `package.json`.
 
-## Funcionamiento Detallado
+### Estructura Base
+- **Vite + Vue 3:** SPA iniciada en `index.html` con el script principal en `src/main.js`
+- **Tailwind CSS:** Configurado en `tailwind.config.js` con optimización para contenido dinámico
+- **Vue Router:** Sistema de enrutamiento con protección de rutas y navegación dinámica
+- **Gestión de Estado:** Implementación de composables y refs para manejo de estado local
 
-### Conexión a las APIs
-El frontend se comunica con el backend a través de peticiones HTTP utilizando la librería `axios`. Las URLs base de las APIs están definidas en los servicios (`src/services`), y se realizan peticiones a endpoints específicos para obtener y manipular los datos.
+### Sistema de Temas
+El frontend implementa un sofisticado sistema de temas con variables CSS personalizadas:
+- 7 temas predefinidos: Conocimiento, Arcilla, Bosque, Índigo, Raíces, Carbon, Light/Dark mode
+- Cada tema define 15+ variables para colores y efectos visuales
+- Transiciones suaves entre temas mediante `transition: all 0.3s ease-in-out`
 
+## Componentes y Vistas Principales
+
+### Estructura de Navegación
+```vue
+<App>
+  <Header /> <!-- Barra de navegación principal -->
+  <router-view /> <!-- Contenido dinámico -->
+</App>
+```
+
+### Rutas Implementadas
+- `/`: Dashboard principal
+- `/iniciar`: Página de inicio de sesión
+- `/contenidos`: Visualización de contenidos
+- `/articulo/:id`: Detalles de artículos
+- `/perfil`: Gestión de perfil
+- `/grados`: Listado de grados
+- `/areas`: Listado de áreas
+- `/temas`: Listado de temas
+- `/administrar`: Panel de administración (protegido)
+
+### Protección de Rutas
 ```javascript
-// Ejemplo de petición GET con axios
-import axios from 'axios';
-
-const API_URL = 'https://colibriback.onrender.com/api/';
-
-export const obtenerSubtemas = async () => {
-  try {
-    const response = await axios.get(API_URL + 'subtemas');
-    return response.data;
-  } catch (error) {
-    console.error("Error al obtener los subtemas:", error);
-    return null;
+router.beforeEach((to, from, next) => {
+  const usuario = obtenerUsuario();
+  if (!usuario && to.path !== "/iniciar") {
+    next("/iniciar");
+  } else {
+    next();
   }
-};
+});
 ```
 
-### Obtención y Visualización del Contenido
-1. **Petición a la API:** Se realiza una petición GET al endpoint correspondiente para obtener los datos (ej: subtemas, temas, áreas, grados).
-2. **Respuesta de la API:** La API responde con un array de objetos en formato JSON.
-3. **Almacenamiento de Datos:** Los datos se almacenan en variables reactivas (`ref`) de Vue 3.
-4. **Visualización:** Se utilizan las directivas de Vue (`v-for`, `v-if`) para renderizar los datos en el template HTML.
+## Características Implementadas
 
-```vue
-<template>
-  <div v-for="subtema in subtemas" :key="subtema.id">
-    <h2>{{ subtema.nombre }}</h2>
-    <p>{{ subtema.descripcion }}</p>
-  </div>
-</template>
+### Sistema de Diseño
+1. **Tipografía Personalizada:**
+   - Fuente principal: Oxanium
+   - Implementación mediante @font-face
+   - Jerarquía tipográfica definida para títulos y texto
 
-<script>
-import { ref, onMounted } from 'vue';
-import { obtenerSubtemas } from '@/services/subtemaService';
+2. **Componentes UI:**
+   - Botones futuristas con efectos hover y active
+   - Tarjetas translúcidas con efectos de elevación
+   - Inputs estilizados con enfoque en la accesibilidad
+   - Modales y lightbox para contenido enriquecido
 
-export default {
-  setup() {
-    const subtemas = ref([]);
+3. **Efectos Visuales:**
+   - Transiciones suaves entre estados
+   - Efectos de blur para capas superpuestas
+   - Animaciones en scroll y hover
+   - Gradientes dinámicos para fondos
 
-    onMounted(async () => {
-      subtemas.value = await obtenerSubtemas();
-    });
+### Características de Interacción
+1. **Filtrado Dinámico:**
+   - Implementación de filtros en cascada
+   - Animaciones en cinta horizontal
+   - Filtros persistentes entre navegaciones
 
-    return { subtemas };
-  }
-}
-</script>
-```
+2. **Visualización y Edición de Contenido:**
+   - Editor WYSIWYG con ToastUI integrado
+   - Soporte para Markdown en artículos
+   - Lightbox para imágenes
+   - Sistema de navegación jerárquico
 
-### Filtrado del Contenido
-El frontend implementa un sistema de filtros interactivos que permite a los usuarios refinar la búsqueda de contenidos. Los filtros se aplican en cascada, es decir, al seleccionar un grado, se filtran las áreas correspondientes, y al seleccionar un área, se filtran los temas correspondientes.
+## Problemas Identificados
 
-1. **Filtros Activos:** Se mantienen los filtros seleccionados por el usuario en variables reactivas (`ref`).
-2. **Filtrado Dinámico:** Se utilizan propiedades computadas (`computed`) para filtrar los datos en función de los filtros activos.
-3. **Actualización de la UI:** La UI se actualiza automáticamente al cambiar los filtros, gracias a la reactividad de Vue 3.
+### Críticos
+1. **Manejo de Estado:**
+   - No hay implementación de Vuex/Pinia
+   - Estado distribuido entre componentes
+   - Falta de persistencia en filtros
 
-```vue
-<template>
-  <div>
-    <select v-model="gradoSeleccionado">
-      <option value="">Todos los grados</option>
-      <option v-for="grado in grados" :key="grado.id" :value="grado.id">{{ grado.nombre }}</option>
-    </select>
-    <ul>
-      <li v-for="subtema in subtemasFiltrados" :key="subtema.id">
-        {{ subtema.nombre }}
-      </li>
-    </ul>
-  </div>
-</template>
+2. **Seguridad:**
+   - Autenticación básica sin refresh tokens
+   - Falta validación de permisos granular
+   - No hay sanitización de contenido
 
-<script>
-import { ref, computed } from 'vue';
+### Mejoras Necesarias
+1. **Rendimiento:**
+   - Implementar lazy loading de imágenes
+   - Optimizar animaciones CSS
+   - Cachear respuestas de API
 
-export default {
-  props: {
-    subtemas: {
-      type: Array,
-      required: true
-    },
-    grados: {
-      type: Array,
-      required: true
-    }
-  },
-  setup(props) {
-    const gradoSeleccionado = ref('');
+2. **Accesibilidad:**
+   - Mejorar contraste en temas
+   - Añadir atributos ARIA
+   - Implementar navegación por teclado
 
-    const subtemasFiltrados = computed(() => {
-      if (!gradoSeleccionado.value) {
-        return props.subtemas;
-      }
-      return props.subtemas.filter(subtema => subtema.grado_id === gradoSeleccionado.value);
-    });
+## Próximas Implementaciones
 
-    return { gradoSeleccionado, subtemasFiltrados };
-  }
-}
-</script>
-```
+### Corto Plazo
+1. **Gestión de Estado:**
+   - Implementar Pinia para estado global
+   - Persistencia de preferencias de usuario
+   - Cache de datos frecuentes
 
-### Aspectos Desconocidos
-- **Manejo de errores:** Aún no se ha implementado un sistema robusto de manejo de errores para las peticiones a la API.
-- **Autenticación y Autorización:** La implementación de la autenticación y autorización de usuarios está pendiente.
-- **Edición y Actualización de Contenidos:** La interfaz para la edición y actualización de contenidos aún se encuentra en desarrollo presentando varios problemas.
+2. **Seguridad:**
+   - Sistema de refresh tokens
+   - Validación de formularios
+   - Protección XSS
 
-## Funcionalidades Implementadas
-- Navegación interactiva y diseño responsivo adaptable a distintos dispositivos.
-- Integración de estilos modernos con Tailwind CSS.
-- Soporte para componentes Vue dinámicos.
+### Medio Plazo
+1. **Rendimiento:**
+   - Implementación de Service Workers
+   - Precarga de rutas populares
+   - Optimización de assets
 
-## Elementos Pendientes por Corregir
-- **Edición y actualización de contenidos:**  
-  Se debe implementar la interfaz que permita modificar y actualizar el contenido directamente desde el frontend.
-- **Permisos de Usuarios para Gestión de Contenido:**  
-  Es necesario definir roles y permisos que controlen quién puede gestionar (crear, editar, borrar) el contenido.
+2. **Funcionalidades:**
+   - Sistema de búsqueda avanzado
+   - Modo offline básico
+   - Mejoras en el editor WYSIWYG actual
 
-## Funcionalidades Pendientes de Implementar
-- Integración completa con la API del backend para sincronización y persistencia de datos.
-- Módulos de autenticación y autorización para la gestión segura de contenidos.
-- Interfaces para edición en tiempo real con validación y vistas previas.
-- Mejoras en usabilidad y accesibilidad, incluyendo ajustes de tamaño de fuente y opciones de lectura en voz alta.
+## Guía de Desarrollo
+1. **Instalación:**
+   ```bash
+   npm install
+   ```
 
-## Ejecución y Contribución
-- Se recomienda seguir las buenas prácticas de desarrollo y usar el control de versiones para colaborar.
-- Para contribuir o reportar errores, sigue las directrices incluidas en la documentación interna del repositorio.
+2. **Desarrollo:**
+   ```bash
+   npm run dev
+   ```
 
-## Conclusión
-El frontend de Co-Libri Learning está diseñado para ser moderno y accesible. Sin embargo, aún quedan pendientes mejoras en la edición y gestión de contenidos, así como la implementación de permisos de usuario, que serán abordados en futuras versiones.
+3. **Construcción:**
+   ```bash
+   npm run build
+   ```
+
+## Convenciones y Estándares
+- Componentes en PascalCase
+- Props en camelCase
+- Eventos en kebab-case
+- CSS modular por componente
+- Commits semánticos
+
+## Contribución
+Ver `CONTRIBUTING.md` para guías detalladas sobre:
+- Flujo de trabajo Git
+- Estándares de código
+- Proceso de revisión
+- Reporte de bugs

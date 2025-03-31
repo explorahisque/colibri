@@ -22,6 +22,8 @@
   },
   "devDependencies": {
     "@rollup/plugin-virtual": "^3.0.2",
+    "@types/node": "^22.13.14",
+    "@vitejs/plugin-react": "^4.3.4",
     "@vitejs/plugin-vue": "^5.2.1",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.3",

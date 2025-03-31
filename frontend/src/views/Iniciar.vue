@@ -104,8 +104,11 @@ export default {
           }
           try {
             await createUser(email.value, password.value, nombre.value);
-            alert('Usuario creado con éxito. Ahora puedes ingresar.');
-            step.value = 3; // Volver a pedir contraseña para ingresar
+            // Iniciar sesión automáticamente tras el registro exitoso
+            await login(email.value, password.value);
+            await checkAuth();
+            const redirectPath = route.query.redirect || '/';
+            window.location.href = redirectPath;
           } catch (error) {
             alert(error.message); // Mostrar mensaje de error específico
           }

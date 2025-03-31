@@ -30,7 +30,7 @@ export default {
     icons.forEach((icon) => {
       app.component(
         `${icon}-icon`,
-        defineAsyncComponent(() => import(`@/assets/${icon}.svg?component`))
+        defineAsyncComponent(() => import(`./${icon}.svg?component`)) // Modificado: ruta relativa
       );
     });
   },

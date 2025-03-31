@@ -64,4 +64,14 @@ const router = createRouter({
   routes,
 });
 
+// Añadir guardia global para redirigir a la página de inicio de sesión si no hay usuario autenticado
+router.beforeEach((to, from, next) => {
+  const usuario = obtenerUsuario();
+  if (!usuario && to.path !== "/iniciar") {
+    next("/iniciar");
+  } else {
+    next();
+  }
+});
+
 export default router;

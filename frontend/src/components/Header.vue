@@ -96,7 +96,7 @@
               </button>
             </li>
             <li v-if="usuario">
-              <button @click="logout; showMenu = false" class="block w-full text-left px-4 py-2 ">
+              <button @click="() => { logout(); showMenu = false }" class="block w-full text-left px-4 py-2 ">
                 <logout-icon class="w-11 h-11 inline-block mr-2 text-white-500" />
                 Salir
               </button>
