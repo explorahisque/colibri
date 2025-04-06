@@ -21,7 +21,7 @@
       </h2>
       <div class="w-full flex items-center justify-center">
         <input 
-          :type="step === 1 || step === 2 ? 'email' : 'text'" 
+          :type="step === 1 || step === 2 ? 'email' : step === 3 || step === 4 ? 'password' : 'text'" 
           v-model="inputValue" 
           :placeholder="step === 1 || step === 2 ? 'Correo electrónico' : step === 5 ? 'Nombre completo' : 'Contraseña'"
           @keyup.enter="nextStep"
