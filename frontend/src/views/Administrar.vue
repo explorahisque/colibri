@@ -120,11 +120,18 @@
     <!-- Barra lateral derecha -->
     <div class="w-16 flex flex-col justify-center items-center space-y-6">
       <div class="space-y-4 text-center">
-        <!-- Se pueden agregar otros botones de acción si se requiere -->
+        <button class="p-2" @click="mostrarImportarModal = true">
+          <import-icon class="w-6 h-6 text-white-500" />
+        </button>
+        <button class="p-2">
+          <print-icon class="w-6 h-6 text-white-500" />
+        </button>
+        <button class="p-2" @click="abrirExportarModal">
+          <export-icon class="w-6 h-6 text-white-500" />
+        </button>
       </div>
     </div>
   </div>
-
   <!-- Modal para formulario de edición/creación de artículo -->
   <div v-if="mostrarModal" class="modal-overlay fixed inset-0 flex items-center justify-center">
     <div class="modal-contenido h-3/4 p-6 rounded-lg w-3/4 relative">
@@ -165,7 +172,70 @@
       </div>
       <div class="flex justify-end space-x-2">
         <button class="bg-gray-300 text-black px-4 py-2 rounded" @click="mostrarModal = false">Cancelar</button>
-        <button class="bg-blue-500 text-white px-4 py-2 rounded" @click="guardararticulo">Guardar</button>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded" @click="guardararticulo()">Guardar</button>
+      </div>
+    </div>
+  </div>
+  <!-- Mover el modal de importación fuera del modal de edición -->
+  <div v-if="mostrarImportarModal" class="modal-overlay fixed inset-0 flex items-center justify-center">
+    <div class="modal-contenido h-3/4 p-6 rounded-lg w-3/4 relative">
+      <h2 class="text-xl font-bold mb-4">Importar contenido de artículos</h2>
+      <p class="mb-4">
+        Adjunta un archivo en formato Markdown con el nombre estructurado como 
+        <strong>"nombre_del_grado-nombre_del_area.md"</strong>. El contenido debe seguir este formato:
+      </p>
+      <pre class="p-4 rounded text-sm mb-4">
+        ### Tema
+        Nombre del Tema
+        #### Artículo (Subtema)
+        Nombre del Artículo
+        ---articulo---
+        Contenido completo del artículo en formato markdown con elementos en html
+        ---articulo---
+      </pre>
+      <div class="mb-4">
+        <label class="block mb-1">Archivo Markdown</label>
+        <input type="file" @change="procesarArchivo" accept=".md" class="w-full border px-3 py-2 rounded" />
+      </div>
+      <div v-if="progresoImportacion > 0" class="mb-4">
+        <p>Progreso de importación: {{ progresoImportacion }}%</p>
+        <div class="w-full bg-gray-200 rounded-full h-4">
+          <div class="bg-blue-500 h-4 rounded-full" :style="{ width: progresoImportacion + '%' }"></div>
+        </div>
+      </div>
+      <div class="flex justify-end space-x-2">
+        <button class="bg-gray-300 text-black px-4 py-2 rounded" @click="mostrarImportarModal = false">Cancelar</button>
+      </div>
+    </div>
+  </div>
+  <!-- Add this new modal at the end, before closing template tag -->
+  <div v-if="mostrarExportarModal" class="modal-overlay fixed inset-0 flex items-center justify-center">
+    <div class="modal-contenido h-auto p-6 rounded-lg w-3/4 bg-white relative">
+      <h2 class="text-xl font-bold mb-4">Exportar contenido de artículos</h2>
+      <div class="mb-4">
+        <label class="block mb-1">Selecciona Grado</label>
+        <select v-model="exportGrado" class="w-full border px-3 py-2 rounded">
+          <option disabled value="">Seleccione un grado</option>
+          <option v-for="grado in gradoNames" :key="grado" :value="grado">
+            {{ grado }}
+          </option>
+        </select>
+      </div>
+      <div class="mb-4" v-if="exportGrado">
+        <label class="block mb-1">Selecciona Área</label>
+        <select v-model="exportArea" class="w-full border px-3 py-2 rounded">
+          <option disabled value="">Seleccione un área</option>
+          <option v-for="area in exportAreaNames" :key="area" :value="area">
+            {{ area }}
+          </option>
+        </select>
+      </div>
+      <div class="flex justify-end space-x-2 mt-4">
+        <button class="bg-gray-300 text-black px-4 py-2 rounded" @click="mostrarExportarModal = false">Cancelar</button>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded" @click="exportarTodo">Exportar todo</button>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded" @click="exportarMarkdown" :disabled="!exportGrado || !exportArea">
+          Exportar selección
+        </button>
       </div>
     </div>
   </div>
@@ -176,6 +246,9 @@ import { ref, computed, onMounted, onBeforeUnmount, watch, nextTick } from "vue"
 import '@toast-ui/editor/dist/toastui-editor.css';
 import Editor from '@toast-ui/editor';
 import { soundMixin } from '@/plugins/sound';
+import { parseMarkdownFile } from '@/utils/markdownImporter'; // Import helper script
+import { generateMarkdown, generateAllMarkdowns } from '@/utils/markdownExporter'; // Add new import for markdownExporter
+import JSZip from 'jszip'; // Add this import
 
 export default {
   mixins: [soundMixin],
@@ -200,6 +273,13 @@ export default {
     });
     const editor = ref(null);
     const editorRef = ref(null);
+
+    const mostrarImportarModal = ref(false);
+    const progresoImportacion = ref(0);
+
+    const abrirImportarModal = () => {
+      mostrarImportarModal.value = true;
+    };
 
     const initEditor = (content = "<p>Escribe aquí...</p>") => {
       if (editorRef.value) {
@@ -437,48 +517,148 @@ export default {
       });
     };
 
-    const guardararticulo = async () => {
-      if (!articuloEditando.value.nombre.trim()) {
-        alert("El nombre del articulo es obligatorio");
+    const guardararticulo = async (overrideData = null) => {
+      // Check if overrideData is an event object
+      if (overrideData instanceof Event) {
+        console.log("Evento detectado, usando articuloEditando directamente");
+        overrideData = null;
+      }
+      
+      const dataToSave = overrideData || articuloEditando.value;
+      console.log("Datos a guardar:", dataToSave);
+      
+      if (!dataToSave) {
+        console.error("Error: No hay datos para guardar");
+        alert("Error: No hay datos para guardar");
         return;
       }
-
+      
+      // Asegurar que nombre sea una cadena, o usar cadena vacía como fallback
+      const nombre = (dataToSave.nombre || "").toString();
+      
+      if (!nombre.trim()) {
+        alert("El nombre del artículo es obligatorio");
+        return;
+      }
+      
       try {
-        // Actualizar el contenido una última vez antes de guardar
-        setTimeout(async () => {
+        if (!overrideData) {
+          await new Promise(resolve => setTimeout(resolve, 200));
           actualizarContenido();
-          
-          const metodo = articuloEditando.value.id ? "PUT" : "POST";
-          const url = articuloEditando.value.id
-            ? `https://colibriback.onrender.com/api/articulos/${articuloEditando.value.id}`
-            : "https://colibriback.onrender.com/api/articulos";
-          
-          const token = localStorage.getItem("token");
-          const response = await fetch(url, {
-            method: metodo,
-            headers: { 
-              "Content-Type": "application/json",
-              "Authorization": token ? `Bearer ${token}` : ""
-            },
-            body: JSON.stringify({
-              titulo: articuloEditando.value.nombre,
-              contenido: articuloEditando.value.contenido,
-              grado_id: articuloEditando.value.gradoId,
-              area_id: articuloEditando.value.areaId,
-              tema_id: articuloEditando.value.temaId,
-            }),
-          });
-          
-          if (!response.ok) throw new Error("Error al guardar el articulo");
-          playAlertSound('success');
-          alert("Artículo guardado con éxito");
-          mostrarModal.value = false;
-          fetchAllData();
-        }, 200);
+        }
+        const metodo = dataToSave.id ? "PUT" : "POST";
+        const url = dataToSave.id
+          ? `https://colibriback.onrender.com/api/articulos/${dataToSave.id}`
+          : "https://colibriback.onrender.com/api/articulos";
+        const token = localStorage.getItem("token");
+        
+        // Validar que los IDs sean valores válidos o null
+        const grado_id = dataToSave.gradoId || null;
+        const area_id = dataToSave.areaId || null;
+        const tema_id = dataToSave.temaId || null;
+        
+        // Asegurar que el contenido sea una cadena válida
+        const contenido = (dataToSave.contenido && typeof dataToSave.contenido === 'string') 
+          ? dataToSave.contenido.trim() || "<p>Escribe aquí...</p>" 
+          : "<p>Escribe aquí...</p>";
+        
+        const response = await fetch(url, {
+          method: metodo,
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": token ? `Bearer ${token}` : ""
+          },
+          body: JSON.stringify({
+            id: dataToSave.id,
+            titulo: nombre,  // FIXED: Changed from "nombre" to the correctly defined variable "nombre"
+            contenido: contenido,
+            grado_id: grado_id,
+            area_id: area_id,
+            tema_id: tema_id,
+            usuario_id: localStorage.getItem("usuario_id") || 1,
+          }),
+        });
+        if (!response.ok) throw new Error("Error al guardar el articulo");
+        playAlertSound('success'); // Added this line from old version
+        alert("Artículo guardado con éxito");
+        mostrarModal.value = false;
+        fetchAllData();
       } catch (error) {
-        playAlertSound('error');
+        playAlertSound('error'); // Added this line from old version
         console.error("Error al guardar el articulo", error);
         alert("Hubo un error al guardar el articulo");
+      }
+    };
+
+    const procesarArchivo = async (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+      
+      console.log("[Importación] Archivo seleccionado:", file.name);
+      
+      try {
+        const content = await file.text();
+        console.log("[Importación] Contenido del archivo leído correctamente.");
+        
+        const parsedData = parseMarkdownFile(content);
+        console.log("[Importación] Datos parseados:", parsedData);
+        
+        for (let i = 0; i < parsedData.length; i++) {
+          const { tema, articulo, contenido } = parsedData[i];
+          console.log(`[Importación] Procesando registro ${i + 1}: Artículo "${articulo || 'Sin nombre'}" del tema "${tema || 'Sin tema'}"`);
+          
+          // Verificar que el artículo tiene un nombre
+          if (!articulo) {
+            console.warn("[Importación] Se encontró un artículo sin nombre, omitiendo...");
+            continue;
+          }
+          
+          const existingArticulo = articulos.value.find(a => a.nombre === articulo);
+      
+          if (existingArticulo) {
+            console.log(`[Importación] Artículo "${articulo}" ya existe.`);
+            // Si el contenido importado es idéntico al existente, se salta sin preguntar
+            if (contenido && contenido.trim() === existingArticulo.contenido.trim()) {
+              console.log(`[Importación] El contenido del artículo "${articulo}" es idéntico; se omite su actualización.`);
+            } else {
+              const replace = confirm(`El artículo "${articulo}" ya existe. ¿Deseas reemplazar su contenido?`);
+              console.log(`[Importación] Decisión de reemplazo para "${articulo}":`, replace);
+              if (replace) {
+                await guardararticulo({
+                  ...existingArticulo,
+                  contenido: contenido && contenido.trim() ? contenido : existingArticulo.contenido,
+                  temaId: (tema && temaMap.value[tema]) || existingArticulo.temaId,
+                });
+                console.log(`[Importación] Contenido del artículo "${articulo}" reemplazado.`);
+              } else {
+                console.log(`[Importación] Se omite el reemplazo del artículo "${articulo}".`);
+              }
+            }
+          } else {
+            // For new articles, use the imported fields
+            await guardararticulo({
+              id: null,
+              nombre: articulo,
+              contenido: contenido && contenido.trim() ? contenido : "<p>Escribe aquí...</p>",
+              temaId: tema && temaMap.value && temaMap.value[tema] ? temaMap.value[tema] : null,
+              gradoId: null, // No podemos asignar automáticamente
+              areaId: null,  // No podemos asignar automáticamente
+            });
+            console.log(`[Importación] Nuevo artículo "${articulo}" creado.`);
+          }
+      
+          progresoImportacion.value = Math.round(((i + 1) / parsedData.length) * 100);
+          console.log(`[Importación] Progreso actual: ${progresoImportacion.value}%`);
+        }
+      
+        console.log("[Importación] Proceso completado con éxito");
+        alert('Importación completada con éxito');
+        progresoImportacion.value = 0;
+        mostrarImportarModal.value = false;
+        fetchAllData();
+      } catch (error) {
+        console.error('[Importación] Error durante el procesamiento del archivo:', error);
+        alert('Hubo un error al procesar el archivo');
       }
     };
 
@@ -491,6 +671,77 @@ export default {
     };
     const editarTema = () => {
       alert("Funcionalidad para editar temas no implementada todavía");
+    };
+
+    // Add new reactive variables for export
+    const mostrarExportarModal = ref(false);
+    const exportGrado = ref("");
+    const exportArea = ref("");
+    
+    // Add computed property for filtered areas
+    const exportAreaNames = computed(() => {
+      const areas = articulos.value
+        .filter(a => a.gradoNombre === exportGrado.value)
+        .map(a => a.areaNombre);
+      return [...new Set(areas)];
+    });
+
+    // Add export related functions
+    const abrirExportarModal = () => {
+      exportGrado.value = "";
+      exportArea.value = "";
+      mostrarExportarModal.value = true;
+    };
+
+    const exportarMarkdown = () => {
+      if (!exportGrado.value || !exportArea.value) return;
+      
+      const mdContent = generateMarkdown(articulos.value, exportGrado.value, exportArea.value);
+      if (!mdContent) {
+        alert("No hay artículos para exportar con esos criterios.");
+        return;
+      }
+
+      const filename = `grado_${exportGrado.value.replace(/\s+/g, '_').toLowerCase()}-${exportArea.value.replace(/\s+/g, '_').toLowerCase()}.md`;
+      const blob = new Blob([mdContent], { type: "text/markdown;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      mostrarExportarModal.value = false;
+    };
+
+    const exportarTodo = async () => {
+      try {
+        const files = generateAllMarkdowns(articulos.value);
+        if (!files.length) {
+          alert("No hay artículos para exportar");
+          return;
+        }
+
+        const zip = new JSZip();
+        files.forEach(file => {
+          zip.file(file.filename, file.content);
+        });
+
+        const content = await zip.generateAsync({ type: "blob" });
+        const url = URL.createObjectURL(content);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "colibri_todos_los_articulos.zip";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        mostrarExportarModal.value = false;
+      } catch (error) {
+        console.error("Error al crear archivo ZIP:", error);
+        alert("Error al crear el archivo ZIP");
+      }
     };
 
     watch(mostrarModal, (newVal) => {
@@ -533,7 +784,18 @@ export default {
       editarArea,
       editarTema,
       playUISound,
-      playAlertSound
+      playAlertSound,
+      mostrarImportarModal,
+      abrirImportarModal,
+      progresoImportacion,
+      procesarArchivo,
+      mostrarExportarModal,
+      exportGrado,
+      exportArea,
+      exportAreaNames,
+      abrirExportarModal,
+      exportarMarkdown,
+      exportarTodo,
     };
   }
 };
