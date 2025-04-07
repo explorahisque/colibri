@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" baseProfile="tiny" version="1.2" viewBox="0 0 512 512">
+  <title>Co-Libri logo</title>
+  <desc>Created by HISQUE Estudio</desc>
+  <path d="M256,16h0c132.5,0,240,107.5,240,240h0c0,132.5-107.5,240-240,240H16v-240C16,123.5,123.5,16,256,16Z" fill="#6e4054" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="15"/>
+  <g>
+    <g>
+      <circle cx="211.4" cy="161.9" r="75.2" fill="#fff"/>
+      <path d="M192.4,423.1c-42.8-8.8-74.9-46.7-74.9-92.1,0-72,150.4-72,150.4,0s-32.2,83.3-75,92.1h-.5Z" fill="#fff"/>
+    </g>
+    <path d="M384.4,233.3h-90.2c-8.3,0-15,6.8-15,15v120.3c0,8.3,6.8,15,15,15h90.2c8.3,0,15-6.8,15-15v-120.3c0-8.3-6.8-15-15-15ZM339.3,353.6h-45.1v-15h45.1v15ZM384.4,323.5h-90.2v-15h90.2v15ZM384.4,293.5h-90.2v-15h90.2v15Z" fill="#fff"/>
+  </g>
+  <metadata>
+    <sfw>
+      <slices/>
+      <sliceSourceBounds x="-235.5" y="-235.5" width="495" height="495" bottomLeftOrigin="true"/>
+    </sfw>
+  </metadata>
+</svg>

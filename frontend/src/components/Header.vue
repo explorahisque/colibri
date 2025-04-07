@@ -77,33 +77,57 @@
         <div v-if="showMenu" class="absolute top-16 right-4 shadow-md rounded-md z-50">
           <ul class="py-2">
             <li v-if="usuario">
-              <button @click="handleNavigation('/contenidos'); showMenu = false" class="block w-full text-left px-4 py-2 ">
+              <button @click="handleNavigation('/contenidos'); showMenu = false" class="block w-full text-left px-4 py-2">
                 <book-icon class="w-11 h-11 inline-block mr-2 text-white-500" />
                 Contenidos
               </button>
             </li>
             <li v-if="usuario">
-              <button @click="handleNavigation('/perfil'); showMenu = false" class="block w-full text-left px-4 py-2 ">
+              <button @click="handleNavigation('/perfil'); showMenu = false" class="block w-full text-left px-4 py-2">
                 <user-icon class="w-11 h-11 inline-block mr-2 text-white-500" />
                 Perfil
               </button>
             </li>
             <li v-if="esAdmin">
-              <button @click="handleNavigation('/administrar'); showMenu = false" class="block w-full text-left px-4 py-2 ">
+              <button @click="handleNavigation('/administrar'); showMenu = false" class="block w-full text-left px-4 py-2">
                 <list-icon class="w-11 h-11 inline-block mr-2 text-white-500" />
                 Administrar
               </button>
             </li>
             <li v-if="!usuario">
-              <button @click="handleNavigation('/iniciar'); showMenu = false" class="block w-full text-left px-4 py-2 ">
+              <button @click="handleNavigation('/iniciar'); showMenu = false" class="block w-full text-left px-4 py-2">
                 <login-icon class="w-11 h-11 inline-block mr-2 text-white-500" />
                 Iniciar sesión
               </button>
             </li>
             <li v-if="usuario">
-              <button @click="() => { handleLogout(); showMenu = false }" class="block w-full text-left px-4 py-2 ">
+              <button @click="() => { handleLogout(); showMenu = false }" class="block w-full text-left px-4 py-2">
                 <logout-icon class="w-11 h-11 inline-block mr-2 text-white-500" />
                 Salir
+              </button>
+            </li>
+            <!-- Botón de Selector de Colores -->
+            <li>
+              <button @click="togglePaletasDropdown" class="block w-full text-left px-4 py-2">
+                <colors-icon class="w-11 h-11 inline-block mr-2 text-white-500" />
+                Colores
+              </button>
+              <!-- Dropdown de colores -->
+              <div v-if="showDropdown" class="palettes-dropdown mt-2">
+                <ul>
+                  <li v-for="palette in paletas" :key="palette.name">
+                    <button @click="applyPalette(palette.class)" class="block w-full text-left px-4 py-2">
+                      {{ palette.name }}
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <!-- Botón de Sonido -->
+            <li>
+              <button @click="toggleSound; showMenu = false" class="block w-full text-left px-4 py-2">
+                <sound-icon :class="{ 'opacity-50': !soundEnabled }" class="w-11 h-11 inline-block mr-2 text-white-500" />
+                {{ soundEnabled ? 'Silenciar' : 'Activar sonido' }}
               </button>
             </li>
           </ul>
