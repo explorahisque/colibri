@@ -39,13 +39,13 @@
         </h1>
         <!-- Accesos rápidos -->
         <div class="dashboard w-full overflow-x-auto">
-          <div class="flex items-center whitespace-nowrap">
+          <div class="flex whitespace-nowrap ml-auto">
             <h2>
               <router-link 
                 v-for="grado in gradoNames" 
                 :key="grado.id" 
                 :to="`/grados/${grado.id}`" 
-                class="inline-block p-4 text-center transition card mx-2"
+                class="inline-block p-4 text-center transition card mx-2 m-8"
                 @mouseenter="handleCardHover"
               >
                 {{ grado.nombre }}
@@ -53,16 +53,16 @@
             </h2>
           </div>
         </div>
-        <div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div class="mt-8 grid grid-cols-2 lg:grid-cols-5 gap-3">
           <router-link 
             v-for="area in areaNames" 
             :key="area.id" 
             :to="`/areas/${area.id}`" 
-            class="p-4 text-center transition card area-card relative content-center"
+            class="card block p-4 rounded-lg shadow hover:shadow-lg transition text-center transition relative content-center text-xl lg:text-2xl"
             @mouseenter="handleCardHover"
           >
             <div 
-              class="img-card absolute inset-0 bg-cover bg-center opacity-50" 
+              class="img-card absolute inset-0 bg-cover bg-center opacity-65" 
               :style="{ backgroundImage: `url(/src/assets/${normalizeName(area.nombre)}.webp)` }"
             ></div>
             <span class="relative z-10">{{ area.nombre }}</span>

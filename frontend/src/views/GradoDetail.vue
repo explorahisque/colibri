@@ -18,12 +18,12 @@
       <div class="flex-1 flex flex-col py-4 overflow-hidden pt-24 overflow-y-auto">
         <h2 class="text-center p-4">{{ gradoNombre }}<br /></h2>
         <!-- Buscador -->
-        <div class="flex items-center justify-center mb-4">
+      <div class="flex items-center justify-center mb-4">
           <input
             type="text"
             v-model="searchQuery"
             placeholder="Buscar articulo..."
-            class="w-1/2 p-3"
+            class="w-full p-3"
           />
         </div>
         <div class="overflow-y-auto">
@@ -73,18 +73,22 @@
             </div>
           </div>
           <!-- Tarjetas de articulos -->
-          <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div v-for="articulo in filteredarticulos" :key="articulo.id" class="card">
-              <router-link :to="`/articulo/${articulo.id}`" class="h2">
-                {{ articulo.nombre }}
-              </router-link>
-              <p class="text-sm">
-                <strong>Grado:</strong> {{ gradoNombre }}<br />
-                <strong>Área:</strong> {{ articulo.areaNombre }}<br />
-                <strong>Tema:</strong> {{ articulo.temaNombre }}
-              </p>
-            </div>
-          </div>
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <router-link
+            v-for="articulo in filteredarticulos"
+            :key="articulo.id"
+            :to="`/articulo/${articulo.id}`"
+            class="card block p-4 rounded-lg shadow hover:shadow-lg transition"
+            @mouseenter="handleCardHover"
+            @click="handleCardClick"
+          >
+            <h2 class="font-bold text-lg mb-2">{{ articulo.nombre }}</h2>
+            <p class="text-sm">
+              <strong>Área:</strong> {{ articulo.areaNombre }}<br />
+              <strong>Tema:</strong> {{ articulo.temaNombre }}
+            </p>
+          </router-link>
+        </div>
         </div>
       </div>
       <!-- Barra lateral derecha -->

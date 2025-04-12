@@ -385,7 +385,9 @@ input[type="password"] {
 }
 /* 🌟 Tarjetas translúcidas con efecto moderno */
 .card {
-  background: var(--card-bg-tra);
+  position: relative;
+  text-shadow: 2px 2px 5px var(--primary-bg);
+  z-index: 0; /* Para asegurar que el contenido esté arriba y hacer el efecto de transparencia */
   border-radius: 16px;
   border: 0.2rem solid var(--secondary-accent);
   padding: 20px;
@@ -395,6 +397,15 @@ input[type="password"] {
   height: fit-content;
   border-bottom-left-radius: 0;
 }
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1; /* Detrás del contenido */
+  border-radius: inherit; /* Si el div tiene bordes redondeados */
+  background: var(--card-bg-tra);
+  opacity: 0.5;
+}
 
 .card:hover {
   transform: translateY(-5px);
@@ -402,13 +413,9 @@ input[type="password"] {
 }
 
 .area-card {
-  background-color: var(--primary-bg);
-  height: 33vh;
-  color: var(--primary-text);
   text-transform: uppercase;
   font-weight: 600;
   font-size: larger;
-  text-shadow: black 1px 1px 3px;
 }
 
 .img-card {

@@ -349,7 +349,12 @@ export default {
         if (
           url.hostname.includes("scielo.org") || 
           url.hostname.includes("academia.edu") || 
+          url.hostname.includes("franzabaleta.com") ||          
+          url.hostname.includes("khanacademy.org") ||
           url.hostname.includes("banrepcultural.org") ||
+          url.hostname.includes("liveworksheets.com") ||
+          url.hostname.includes("humboldt.org.co") ||
+          url.hostname.includes("wwf-scp.org") ||
           url.hostname.includes("researchgate.net")
         ) {
           window.open(link, "_blank");
