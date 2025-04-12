@@ -22,15 +22,15 @@
             type="text"
             v-model="searchQuery"
             placeholder="Buscar articulo..."
-            class="w-1/2 p-3"
+            class="w-full p-3"
           />
         </div>
       <div class="overflow-y-auto">
         <!-- Filtros interactivos -->
         <div class="mt-6 space-y-4">
           <!-- Filtro de Grados -->
-          <div class="cinta-horizontal relative">
-            <h2 class="text-xl font-semibold">Grados</h2>
+          <h2 class="text-xl font-semibold">Grados</h2>
+          <div class="cinta-horizontal relative">            
             <!-- 
               :class con objeto: 
               - 'animate-grados' se aplica cuando NO hay un grado activo
@@ -71,8 +71,8 @@
           </div>
 
           <!-- Filtro de Áreas -->
+          <h3 class="text-lg font-semibold">Áreas</h3>
           <div class="cinta-horizontal relative">
-            <h3 class="text-lg font-semibold">Áreas</h3>
             <div class="loop-container"
                 :class="[{ 'animate-areas': !activeFilters.areas }, { 'paused': !!activeFilters.areas }]">
               <div class="loop-content flex space-x-2">
@@ -108,8 +108,8 @@
           </div>
 
           <!-- Filtro de Temas -->
+          <h4 class="text-base font-semibold">Temas</h4>
           <div class="cinta-horizontal relative">
-            <h4 class="text-base font-semibold">Temas</h4>
             <div class="loop-container"
                 :class="[{ 'animate-temas': !activeFilters.temas }, { 'paused': !!activeFilters.temas }]">
               <div class="loop-content flex space-x-2">
@@ -147,16 +147,21 @@
 
         <!-- Tarjetas de articulos -->
         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div v-for="articulo in filteredarticulos" :key="articulo.id" class="card" @mouseenter="handleCardHover">
-            <router-link :to="`/articulo/${articulo.id}`" class="h2" @click="handleCardClick">
-              {{ articulo.nombre }}
-            </router-link>
+          <router-link
+            v-for="articulo in filteredarticulos"
+            :key="articulo.id"
+            :to="`/articulo/${articulo.id}`"
+            class="card block p-4 rounded-lg shadow hover:shadow-lg transition"
+            @mouseenter="handleCardHover"
+            @click="handleCardClick"
+          >
+            <h2 class="font-bold text-lg mb-2">{{ articulo.nombre }}</h2>
             <p class="text-sm">
               <strong>Grado:</strong> {{ articulo.gradoNombre }}<br />
               <strong>Área:</strong> {{ articulo.areaNombre }}<br />
               <strong>Tema:</strong> {{ articulo.temaNombre }}
             </p>
-          </div>
+          </router-link>
         </div>
 
       </div>

@@ -292,3 +292,83 @@ celebration.simple: 0.5  // Medio
    - Volúmenes optimizados por contexto
    - Feedback consistente
    - Desactivación global disponible
+
+## Funcionalidades Adicionales
+
+### Editor WYSIWYG (ToastUI)
+El frontend integra un editor WYSIWYG basado en ToastUI para la creación y edición de contenido en formato Markdown.
+
+#### Uso:
+```javascript
+import Editor from '@toast-ui/editor';
+
+const initEditor = (content = "<p>Escribe aquí...</p>") => {
+  editor.value = new Editor({
+    el: editorRef.value,
+    height: '300px',
+    initialEditType: 'markdown',
+    previewStyle: 'vertical',
+    initialValue: content,
+  });
+};
+```
+
+### Importación y Exportación de Contenido
+El sistema permite importar archivos Markdown para crear artículos y exportar contenido en formato Markdown o ZIP.
+
+#### Exportar Contenido:
+```javascript
+const exportarMarkdown = () => {
+  const blob = new Blob([mdContent], { type: "text/markdown;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+};
+```
+
+#### Importar Contenido:
+```javascript
+const procesarArchivo = async (event) => {
+  const file = event.target.files[0];
+  const content = await file.text();
+  const parsedData = parseMarkdownFile(content);
+};
+```
+
+### Lightbox para Imágenes
+El sistema incluye un lightbox para visualizar imágenes en un formato ampliado.
+
+#### Uso:
+```javascript
+const abrirLightbox = (src) => {
+  lightboxImageSrc.value = src;
+  lightboxVisible.value = true;
+};
+```
+
+### Sistema de Filtros
+El frontend implementa un sistema de filtros dinámicos en cascada para grados, áreas y temas.
+
+#### Ejemplo:
+```javascript
+const toggleFilter = (type, name) => {
+  activeFilters.value[type] = activeFilters.value[type] === name ? null : name;
+};
+```
+
+### Protección de Rutas con Roles
+Además de la protección básica, se valida el rol del usuario para restringir el acceso a ciertas vistas.
+
+#### Ejemplo:
+```javascript
+router.beforeEach((to, from, next) => {
+  const usuario = obtenerUsuario();
+  if (!usuario || usuario.rol !== "administrador") {
+    next("/");
+  } else {
+    next();
+  }
+});
+```

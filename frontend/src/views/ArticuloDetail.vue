@@ -1,5 +1,20 @@
-<template>
+<template> 
   <div class="overflow-y-auto h-screen relative">
+    <!-- Barra lateral izquierda -->
+    <div class="w-16 flex flex-col justify-center items-center space-y-6">
+      <div class="space-y-4 text-center">
+        <!-- <button class="p-2">
+          <new-icon class="w-6 h-6" />
+        </button>
+        <button class="p-2">
+          <edit-icon class="w-6 h-6" />
+        </button>
+        <button class="p-2">
+          <delete-icon class="w-6 h-6" />
+        </button> -->
+      </div>
+    </div>
+    <!-- Contenido principal -->
     <div
       class="dinamico-bg absolute top-0 left-0 w-full h-full"
       :style="{ backgroundImage: primeraImagen ? `url(${primeraImagen})` : '' }"
@@ -53,7 +68,12 @@
           >
             <CerrarIcon class="w-6 h-6 text-white-500" />
           </button>
-          <iframe :src="iframeSrc" class="w-full h-full border rounded"></iframe>
+          <iframe 
+            :src="iframeSrc" 
+            class="w-full h-full border rounded"
+            allowfullscreen
+            allow="fullscreen"
+          ></iframe>
         </div>
       </div>
       <!-- Lightbox -->
@@ -61,7 +81,7 @@
         v-if="lightboxVisible"
         class="lightbox fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
       >
-        <div class="relative">
+        <div class="relative margin-auto max w-full flex items-center justify-center">
           <img
             :src="lightboxImageSrc"
             alt="Imagen ampliada"
@@ -75,13 +95,8 @@
             @touchmove="onLightboxTouchMove"
             @touchend="onLightboxTouchEnd"
           >
-          <button
-            @click="cerrarLightbox"
-            class="absolute top-4 right-4 bg-gray-800 text-white p-2 rounded-full"
-          >
-            <CerrarIcon class="w-6 h-6" />
-          </button>
-          <div class="absolute bottom-4 left-4 flex space-x-2">
+          
+          <div class="fixed bottom-0 flex space-x-2">
             <button
               @click="ajustarZoom(0.1)"
               class="bg-gray-800 text-white p-2 rounded"
@@ -118,15 +133,45 @@
             >
               ↓
             </button>
+            <button
+            @click="cerrarLightbox"
+            class="bg-gray-800 text-white p-2 rounded-full"
+          >
+            <CerrarIcon class="w-6 h-6" />
+          </button>
           </div>
         </div>
+      </div>
+    </div>
+    <!-- Barra lateral derecha -->
+    <div class="w-16 fixed right-0 top-20 bottom-0 flex flex-col justify-start items-center py-8 z-20">
+      <div class="space-y-2 text-center overflow-y-auto max-h-[80vh] scrollbar-hide">
+        <ul class="scrollspy-nav">
+          <li
+            v-for="(heading, index) in tableOfContents"
+            :key="index"
+            class="cursor-pointer mb-3 relative group"
+          >
+            <button
+              @click="scrollToHeading(heading.id)"
+              class="p-2 flex items-center justify-center rounded-full bg-opacity-50 hover:bg-opacity-100 transition-all duration-300"
+              :class="activeHeading === heading.id ? 'bg-primary-accent' : 'bg-primary-bg'"
+              :title="heading.text"
+            >
+              <span class="bullet-point"></span>
+            </button>
+            <span class="tooltip-text hidden group-hover:block absolute left-full ml-2 bg-secondary-accent p-2 rounded text-xs whitespace-nowrap">
+              {{ heading.text }}
+            </span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { ref, onMounted, watch, nextTick } from "vue";
+import { ref, onMounted, watch, nextTick, onUnmounted } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
 import { marked } from "marked"; // Importa marked
@@ -168,6 +213,63 @@ export default {
     const isPinching = ref(false);
     const pinchStartDistance = ref(0);
     const initialZoom = ref(1);
+
+    const tableOfContents = ref([]);
+    const activeHeading = ref('');
+
+    // Extract headings from content and build table of contents
+    const buildTableOfContents = () => {
+      nextTick(() => {
+        if (!contenidoRef.value) return;
+        
+        const headingElements = contenidoRef.value.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        const headings = [];
+        
+        headingElements.forEach((el, index) => {
+          // Ensure each heading has an id
+          if (!el.id) {
+            el.id = `heading-${index}`;
+          }
+          
+          headings.push({
+            id: el.id,
+            text: el.textContent.trim(),
+            level: parseInt(el.tagName.substring(1), 10)
+          });
+        });
+        
+        tableOfContents.value = headings;
+      });
+    };
+
+    // Function to scroll to a specific heading when clicked in TOC
+    const scrollToHeading = (id) => {
+      playUISound('ui.tap');
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        activeHeading.value = id;
+      }
+    };
+
+    // Update active heading based on scroll position
+    const updateActiveHeading = () => {
+      if (!contenidoRef.value) return;
+      
+      const headings = tableOfContents.value;
+      const scrollPosition = window.scrollY + 100; // Offset to trigger earlier
+      
+      for (let i = headings.length - 1; i >= 0; i--) {
+        const element = document.getElementById(headings[i].id);
+        if (element && element.offsetTop <= scrollPosition) {
+          activeHeading.value = headings[i].id;
+          return;
+        }
+      }
+      
+      // If we get here, no heading is active
+      activeHeading.value = '';
+    };
 
     const fetcharticuloById = async (id) => {
       try {
@@ -242,28 +344,35 @@ export default {
       playUISound('ui.unlock');
       try {
         const url = new URL(link);
-
+    
+        // Sitios académicos que deben abrirse en nueva pestaña
+        if (
+          url.hostname.includes("scielo.org") || 
+          url.hostname.includes("academia.edu") || 
+          url.hostname.includes("banrepcultural.org") ||
+          url.hostname.includes("researchgate.net")
+        ) {
+          window.open(link, "_blank");
+          return;
+        }
+    
+        // Enlaces de plataformas multimedia que se embeben directamente
         if (url.hostname.includes("spotify.com")) {
           window.open(link, "_blank");
           return;
         }
-
+    
         if (
           url.hostname === "youtube.com" ||
           url.hostname === "www.youtube.com"
         ) {
           const videoId = url.searchParams.get("v");
-          iframeSrc.value = `https://www.youtube.com/embed/${videoId}`;
+          iframeSrc.value = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
         } else if (url.hostname === "youtu.be") {
           const videoId = url.pathname.substring(1);
-          iframeSrc.value = `https://www.youtube.com/embed/${videoId}`;
-        } else if (url.hostname.includes("scielo.org")) {
-          window.open(link, "_blank");
-          return;
-        } else if (url.hostname.includes("researchgate.net")) {
-          window.open(link, "_blank");
-          return;
+          iframeSrc.value = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
         } else {
+          // Cualquier otro enlace se muestra en el iframe dentro del lightbox
           iframeSrc.value = link;
         }
         modalVisible.value = true;
@@ -284,10 +393,41 @@ export default {
     const renderizarContenido = (contenido) => {
       if (!contenido) return "<p>Contenido no disponible</p>";
 
+      // Check if content is already HTML
       if (contenido.trim().startsWith("<")) {
-        return contenido;
+        // If it's HTML, process links and images directly
+        const temp = document.createElement("div");
+        temp.innerHTML = contenido;
+
+        // Process links: Embed videos, open others in new tab
+        temp.querySelectorAll("a").forEach((a) => {
+          const href = a.getAttribute("href");
+          if (href && (href.includes("youtube.com") || href.includes("youtu.be"))) {
+            const videoId = href.includes("youtube.com")
+              ? new URL(href).searchParams.get("v")
+              : href.split("/").pop();
+            const iframe = document.createElement("iframe");
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0&modestbranding=1`;
+            iframe.classList.add("w-full", "aspect-video", "rounded", "my-4"); // Added aspect-video and margin
+            iframe.setAttribute("allowfullscreen", "true");
+            iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"); // Added recommended allow attributes
+            a.replaceWith(iframe);
+          } else if (href && !href.startsWith("#")) {
+            a.setAttribute("target", "_blank");
+            a.removeAttribute("onclick"); // Remove modal trigger
+          }
+        });
+
+        // Add lightbox functionality to images
+        temp.querySelectorAll("img").forEach((img) => {
+          img.classList.add("cursor-pointer");
+          img.onclick = () => abrirLightbox(img.src);
+        });
+
+        return temp.innerHTML;
       }
 
+      // Process Markdown content
       let contenidoLimpio = contenido.replace(/\\n/g, "\n");
       const campoRegex = /^".+?":\s*"(.*)"$/s;
       const match = contenidoLimpio.match(campoRegex);
@@ -299,7 +439,7 @@ export default {
       const temp = document.createElement("div");
       temp.innerHTML = htmlContent;
 
-      // Agrupar nodos en tarjetas a partir de cada título
+      // Agrupar nodos en tarjetas a partir de cada título H1/H2
       const container = document.createElement("div");
       let currentCard = null;
       Array.from(temp.childNodes).forEach((node) => {
@@ -311,36 +451,98 @@ export default {
             container.appendChild(currentCard);
           }
           currentCard = document.createElement("div");
-          currentCard.classList.add("card", "mb-4", "break-inside-avoid");
+          currentCard.classList.add("card", "mb-4", "break-inside-avoid"); // Added some card styling
           currentCard.appendChild(node.cloneNode(true));
         } else {
+          // If no card started yet (content before first H1/H2), create a default one
+          if (!currentCard && node.textContent.trim()) {
+             currentCard = document.createElement("div");
+             currentCard.classList.add("card", "mb-4", "p-4", "bg-white", "bg-opacity-75", "rounded", "shadow", "break-inside-avoid");
+          }
+          // Append node to the current card if it exists
           if (currentCard) {
             currentCard.appendChild(node.cloneNode(true));
           } else {
-            container.appendChild(node.cloneNode(true));
+             // If node is not whitespace and no card exists, append directly (should ideally not happen with card logic)
+             if (node.textContent.trim()) {
+                container.appendChild(node.cloneNode(true));
+             }
           }
         }
       });
       if (currentCard) {
-        container.appendChild(currentCard);
+        container.appendChild(currentCard); // Append the last card
       }
 
-      // Restaurar funcionalidad de modal en enlaces externos y agregar target="_blank"
+      // Process links and images within the final container structure
       container.querySelectorAll("a").forEach((a) => {
         const href = a.getAttribute("href");
-        if (href && !href.startsWith("#")) {
-          a.setAttribute("target", "_blank");
-          a.setAttribute(
-            "onclick",
-            "event.preventDefault(); window.abrirModalArticulo(this.href)"
-          );
+        if (!href) return;
+        
+        try {
+          // Check if it's an internal anchor link
+          if (href.startsWith("#")) {
+            // Keep internal links as they are
+            return;
+          }
+          
+          const url = new URL(href);
+          
+          // Enlaces de YouTube se embeben directamente
+          if (url.hostname.includes("youtube.com") || url.hostname.includes("youtu.be")) {
+            const videoId = url.hostname.includes("youtube.com")
+              ? url.searchParams.get("v")
+              : url.pathname.split("/").pop();
+            
+            if (videoId) {
+              const iframe = document.createElement("iframe");
+              iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0&modestbranding=1`;
+              iframe.classList.add("w-full", "aspect-video", "rounded", "my-4");
+              iframe.setAttribute("allowfullscreen", "true");
+              iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+              
+              if (a.parentElement.tagName === 'P' && a.parentElement.textContent.trim() === a.textContent.trim()) {
+                a.parentElement.replaceWith(iframe);
+              } else {
+                a.replaceWith(iframe);
+              }
+            }
+          } 
+          // Sitios académicos que se abren en nueva pestaña
+          else if (
+            url.hostname.includes("scielo.org") || 
+            url.hostname.includes("academia.edu") || 
+            url.hostname.includes("banrepcultural.org") ||
+            url.hostname.includes("researchgate.net") ||
+            url.hostname.includes("spotify.com")
+          ) {
+            a.setAttribute("target", "_blank");
+            a.setAttribute("rel", "noopener noreferrer");
+          } 
+          // Cualquier otro enlace externo se muestra en el modal con iframe
+          else {
+            // Mark the link with a data attribute that we'll use for delegation
+            a.setAttribute("data-modal-link", href);
+            a.setAttribute("href", "#");
+            a.classList.add("modal-link");
+            a.style.cursor = "pointer";
+            a.style.textDecoration = "underline";
+          }
+        } catch (e) {
+          console.warn("Error al procesar URL en enlace:", href, e);
+          
+          // For invalid URLs, still open in modal
+          a.setAttribute("data-modal-link", href);
+          a.setAttribute("href", "#");
+          a.classList.add("modal-link");
+          a.style.cursor = "pointer";
         }
       });
 
-      // Agrega funcionalidad de lightbox a las imágenes
+      // Add lightbox functionality to images within the final container
       container.querySelectorAll("img").forEach((img) => {
-        img.classList.add("cursor-pointer");
-        img.onclick = () => abrirLightbox(img.src); // Cambiar a `onclick` para asegurar el registro del evento
+        img.classList.add("cursor-pointer", "my-4", "rounded", "shadow"); // Added margin, rounded, shadow
+        img.onclick = () => abrirLightbox(img.src);
       });
 
       return container.innerHTML;
@@ -499,10 +701,44 @@ export default {
       }
     };
 
-    // Exponer la función abrirModal globalmente para que los enlaces puedan acceder a ella
-    window.abrirModalArticulo = (href) => {
-      abrirModal(href);
+    // Add a delegate event listener for modal links
+    const attachModalLinkListeners = () => {
+      if (contenidoRef.value) {
+        // Remove previous listener to avoid duplicates if re-attaching
+        contenidoRef.value.removeEventListener("click", handleModalLinkClick); 
+        contenidoRef.value.addEventListener("click", handleModalLinkClick);
+      }
     };
+
+    // Define the handler function separately
+    const handleModalLinkClick = (event) => {
+      let target = event.target;
+      while (target && target !== contenidoRef.value) {
+        if (target.hasAttribute && target.hasAttribute("data-modal-link")) {
+          event.preventDefault();
+          const href = target.getAttribute("data-modal-link");
+          if (href) {
+            abrirModal(href);
+          }
+          return; // Stop propagation and further checks
+        }
+        target = target.parentElement;
+      }
+    };
+
+    // Exponer la función abrirModal globalmente para que los enlaces puedan acceder a ella
+    // REMOVE OR COMMENT OUT this line if abrirModal is ONLY for non-video links handled outside renderizarContenido
+    // window.abrirModalArticulo = (href) => {
+    //   // Check if it's a video link, if so, do nothing as it should be embedded
+    //   try {
+    //     const url = new URL(href);
+    //     if (url.hostname.includes("youtube.com") || url.hostname.includes("youtu.be")) {
+    //       console.warn("Attempted to open YouTube link in modal, but it should be embedded.");
+    //       return;
+    //     }
+    //   } catch (e) { /* Ignore invalid URLs for this check */ }
+    //   abrirModal(href);
+    // };
 
     // **Corrected Hash Handling**
     const scrollToHeadingByText = (hashText) => {
@@ -565,7 +801,31 @@ export default {
       nextTick(() => {
         obtenerPrimeraImagen();
         attachLightboxListeners();
+        attachModalLinkListeners(); // Initial attachment
+        buildTableOfContents();
+        // Add scroll event listener to update active heading
+        window.addEventListener('scroll', updateActiveHeading);
       });
+    });
+
+    // Watch for content changes to rebuild TOC and re-attach listeners
+    watch(() => articulo.value.contenido, () => {
+      nextTick(() => {
+        // Re-attach listeners after content is updated by v-html
+        attachLightboxListeners(); 
+        attachModalLinkListeners(); 
+        buildTableOfContents();
+        obtenerPrimeraImagen(); // Also re-check for first image
+      });
+    });
+
+    // Clean up event listener
+    onUnmounted(() => {
+      window.removeEventListener('scroll', updateActiveHeading);
+      // Clean up modal link listener
+      if (contenidoRef.value) {
+        contenidoRef.value.removeEventListener("click", handleModalLinkClick);
+      }
     });
 
     return {
@@ -595,8 +855,44 @@ export default {
       onLightboxTouchMove,
       onLightboxTouchEnd,
       playUISound,
-      playAlertSound
+      playAlertSound,
+      tableOfContents,
+      activeHeading,
+      scrollToHeading,
+      attachLightboxListeners,
     };
   },
 };
 </script>
+
+<style scoped>
+.scrollspy-nav {
+  list-style-type: none;
+  padding: 0;
+}
+
+.bullet-point {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--primary-text);
+  display: block;
+}
+
+.tooltip-text {
+  color: var(--primary-text);
+  z-index: 100;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style>

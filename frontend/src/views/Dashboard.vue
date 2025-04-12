@@ -38,8 +38,8 @@
           Hola {{ authState.user?.nombre || 'Usuari@' }}
         </h1>
         <!-- Accesos rápidos -->
-        <div class="dashboard w-full overflow-hidden">
-          <div class="flex items-center whitespace-nowrap overflow-x-auto">
+        <div class="dashboard w-full overflow-x-auto">
+          <div class="flex items-center whitespace-nowrap">
             <h2>
               <router-link 
                 v-for="grado in gradoNames" 

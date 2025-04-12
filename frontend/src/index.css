@@ -458,7 +458,7 @@ input[type="password"] {
   animation: scroll-right 20s linear infinite;
 }
 .animate-temas {
-  animation: scroll-left 10s linear infinite;
+  animation: scroll-left 5s linear infinite;
 }
 
 /* Detalles de contenido */
