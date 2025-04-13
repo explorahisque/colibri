@@ -244,17 +244,24 @@ body {
 }
 
 /* Tipografía */
-h1, h2, h3, h4, h5, h6 {
+
+h1, h2, h3, h4 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 2rem;
 }
 
-h1 {
-  font-size: 2.5rem;
-  font-weight: lighter;
+h5, h6 {
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
 }
 
-h2 {
-  font-size: 1.3rem;
-  /* font-weight: lighter; */
+p {
+  font-size: 1.125rem;
+  line-height: 2rem;
 }
 
 a {
@@ -304,6 +311,12 @@ button.logo {
   padding: 1rem;
   border-radius: 0;
   cursor: pointer;
+}
+
+.btn-filtro {
+  border-radius: 100px;
+  border-bottom-left-radius: 0;
+
 }
 
 .btn-filtro-activo {
@@ -356,6 +369,7 @@ input[type="text"] {
 input::placeholder {
   color: var(--secondary-accent);
   text-align: center;
+
 }
 
 input:focus {
@@ -514,6 +528,7 @@ select {
   background-color: var(--secondary-accent);
 }
 
+
 /* Elementos markdown del ArticuloDetail */
 
 .articulo-contendedor {
@@ -528,13 +543,16 @@ select {
 }
 
 .prose p {
+  font-size: 1.125rem;
+  line-height: 2rem;
 }
 
 .prose h1, .prose h2, .prose h3, .prose h4 {
   margin-top: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   font-weight: 600;
-  font-size: large
+  font-size: 2rem;
+  line-height: 2rem;
 }
 
 .prose ul {

@@ -105,6 +105,12 @@
                 Iniciar sesión
               </button>
             </li>
+            <li>
+              <button @click="handleNavigation('/nosotros'); showMenu = false" class="block w-full text-left px-4 py-2">
+                <info-icon class="w-11 h-11 inline-block mr-2 text-white-500" />
+                Acerca de Co-Libri
+              </button>
+            </li>
             <li v-if="usuario">
               <button @click="() => { handleLogout(); showMenu = false }" class="block w-full text-left px-4 py-2">
                 <logout-icon class="w-11 h-11 inline-block mr-2 text-white-500" />
@@ -134,12 +140,6 @@
                 <sound-icon :class="{ 'opacity-50': !soundEnabled }" class="w-11 h-11 inline-block mr-2 text-white-500" />
                 {{ soundEnabled ? 'Silenciar' : 'Activar sonido' }}
               </button>
-            </li>
-            <li>
-              <router-link to="/nosotros" class="block w-full text-left px-4 py-2">
-                <info-icon class="w-11 h-11 inline-block mr-2 text-white-500" />
-                Acerca de Co-Libri
-              </router-link>
             </li>
           </ul>
         </div>

@@ -82,10 +82,10 @@
             @mouseenter="handleCardHover"
             @click="handleCardClick"
           >
-            <h2 class="font-bold text-lg mb-2">{{ articulo.nombre }}</h2>
-            <p class="text-sm">
-              <strong>Área:</strong> {{ articulo.areaNombre }}<br />
-              <strong>Tema:</strong> {{ articulo.temaNombre }}
+            <h2 class="">{{ articulo.nombre }}</h2>
+            <p class="">
+              <u>Área:</u> {{ articulo.areaNombre }}<br />
+              <u>Tema:</u> {{ articulo.temaNombre }}
             </p>
           </router-link>
         </div>

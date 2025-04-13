@@ -1,8 +1,8 @@
 <template>
   <div class="min-h-screen p-6 futuristic-bg text-futuristic-text">
     <header class="mb-12 text-center">
-      <h1 class="text-6xl font-extrabold tracking-widest futuristic-title">Co-Libri: <strong>El Futuro del Conocimiento</strong></h1>
-      <p class="mt-4 text-xl italic opacity-80">"<u>Donde la educación y la tecnología convergen</u>"</p>
+      <h1 class="text-6xl font-extrabold tracking-widest mt-16 futuristic-title p-8"><strong>Co-Libri</strong></h1>
+      <p class="mt-4 text-xl opacity-80">Hoja de ruta y contenidos para el bachillerato en Colombia</p>
     </header>
 
     <section class="mb-16">
@@ -89,17 +89,18 @@ export default {
 
 /* Tipografía futurista */
 .futuristic-title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Oxanium', sans-serif;
   color: var(--light-text);
-  text-shadow: 0 0 10px var(--light-text), 0 0 20px var(--light-text);
+  text-shadow: 0 0 2px var(--light-text), 0 0 2px var(--light-text);
 }
 
 .futuristic-heading {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Oxanium', sans-serif;
   color: var(--light-text);
   text-shadow: 0 0 5px var(--light-text);
   border-bottom: 2px solid var(--light-text);
   padding-bottom: 0.5rem;
+  padding: 1.5rem;
 }
 
 /* Tarjetas futuristas */

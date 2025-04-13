@@ -93,13 +93,13 @@
         <!-- Tarjetas de articulos -->
         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div v-for="articulo in filteredarticulos" :key="articulo.id" class="card p-4">
-            <router-link :to="`/articulo/${articulo.id}`" class="h2 font-bold">
+            <h2><router-link :to="`/articulo/${articulo.id}`" class="">
               {{ articulo.nombre }}
-            </router-link>
-            <p class="text-sm">
-              <strong>Grado:</strong> {{ articulo.gradoNombre }}<br />
-              <strong>Área:</strong> {{ articulo.areaNombre }}<br />
-              <strong>Tema:</strong> {{ articulo.temaNombre }}
+            </router-link></h2>
+            <p class="">
+              <u>Grado:</u> {{ articulo.gradoNombre }}<br />
+              <u>Área:</u> {{ articulo.areaNombre }}<br />
+              <u>Tema:</u> {{ articulo.temaNombre }}
             </p>
             <!-- Botones de Acciones CRUD -->
             <div class="flex space-x-2 mt-2">
