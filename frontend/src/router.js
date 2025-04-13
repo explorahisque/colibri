@@ -12,6 +12,7 @@ import Administrar from "@/views/Administrar.vue"; // 🔹 Importar la vista Adm
 import GradoDetail from "@/views/GradoDetail.vue"; // 🔹 Importar la vista para detalles de grados
 import AreaDetail from "@/views/AreaDetail.vue";   // 🔹 Importar la vista para detalles de áreas
 import ContentView from "@/views/ContentView.vue"; // 🔹 Importar la vista para contenido estático
+import Nosotros from "@/views/Nosotros.vue"; // Importar la nueva vista
 
 const routes = [
   { path: "/", component: Dashboard },
@@ -57,6 +58,12 @@ const routes = [
     name: "ContentView",
     component: ContentView
   },
+  { 
+    path: "/nosotros", 
+    name: "Nosotros", 
+    component: Nosotros, 
+    meta: { requiresAuth: false } // Permitir acceso sin autenticación
+  },
 ];
 
 const router = createRouter({
@@ -67,7 +74,7 @@ const router = createRouter({
 // Añadir guardia global para redirigir a la página de inicio de sesión si no hay usuario autenticado
 router.beforeEach((to, from, next) => {
   const usuario = obtenerUsuario();
-  if (!usuario && to.path !== "/iniciar") {
+  if (!usuario && to.path !== "/nosotros" && to.path !== "/iniciar") {
     next("/iniciar");
   } else {
     next();

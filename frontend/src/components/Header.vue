@@ -36,6 +36,11 @@
             <span class="tooltip">Salir</span>
           </button>
 
+          <button @click="handleNavigation('/nosotros')" class="boton-icono" aria-label="Acerca de Co-Libri">
+            <info-icon class="w-11 h-11 text-white-500" />
+            <span class="tooltip">Acerca de Co-Libri</span>
+          </button>
+
           <button @click="togglePaletasDropdown" class="boton-icono" aria-label="Selector de colores">
             <colors-icon class="w-11 h-11 text-white-500" />
             <span class="tooltip">Colores</span>
@@ -130,6 +135,12 @@
                 {{ soundEnabled ? 'Silenciar' : 'Activar sonido' }}
               </button>
             </li>
+            <li>
+              <router-link to="/nosotros" class="block w-full text-left px-4 py-2">
+                <info-icon class="w-11 h-11 inline-block mr-2 text-white-500" />
+                Acerca de Co-Libri
+              </router-link>
+            </li>
           </ul>
         </div>
       </div>
@@ -169,9 +180,10 @@ import PauseIcon from "@/assets/pause.svg?component";
 import StopIcon from "@/assets/stop.svg?component";
 import ColorsIcon from "@/assets/colors.svg?component";
 import CerrarIcon from "@/assets/cerrar.svg?component";
+import InfoIcon from "@/assets/info.svg?component";
 
 export default {
-  components: { SearchIcon, NewIcon, EditIcon, DeleteIcon, ImportIcon, ExportIcon, UpIcon, DownIcon, PrintIcon, RightIcon, LeftIcon, BookIcon, ListIcon, UserIcon, UserBookIcon, UserCreateIcon, UserEditIcon, UserDeleteIcon, LoginIcon, LogoutIcon, PlayIcon, PauseIcon, StopIcon, ColorsIcon, CerrarIcon, SoundIcon },
+  components: { SearchIcon, NewIcon, EditIcon, DeleteIcon, ImportIcon, ExportIcon, UpIcon, DownIcon, PrintIcon, RightIcon, LeftIcon, BookIcon, ListIcon, UserIcon, UserBookIcon, UserCreateIcon, UserEditIcon, UserDeleteIcon, LoginIcon, LogoutIcon, PlayIcon, PauseIcon, StopIcon, ColorsIcon, CerrarIcon, SoundIcon, InfoIcon },
   
   setup() {
     const router = useRouter(); // Usar el enrutador
